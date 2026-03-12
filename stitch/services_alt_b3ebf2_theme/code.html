@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Services | Tech Consulting Agency</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          },
+          colors: {
+            brand: {
+              light: '#F8FAFC',
+              base: '#F1F5F9',
+              dark: '#64748B',
+            },
+            accent: {
+              DEFAULT: '#B3EBF2',
+              dark: '#92D9E2',
+              text: '#111827'
+            }
+          },
+          borderRadius: {
+            'custom': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="layout-refinements">
+    body { font-family: 'Inter', sans-serif; }
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body class="bg-brand-light text-gray-900 font-sans antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+<div class="max-container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
+<div class="text-2xl font-extrabold tracking-tighter text-gray-900">TECHCONSULT</div>
+<nav class="hidden md:flex space-x-8 font-medium">
+<a class="text-gray-500 hover:text-gray-900 transition-colors" href="#">Home</a>
+<a class="text-gray-900 border-b-2 border-accent" href="#">Services</a>
+<a class="text-gray-500 hover:text-gray-900 transition-colors" href="#">Portfolio</a>
+<a class="text-gray-500 hover:text-gray-900 transition-colors" href="#">Contact</a>
+</nav>
+<button class="bg-accent text-accent-text px-6 py-2.5 rounded-custom text-sm font-bold hover:bg-accent-dark transition-colors">
+        GET A QUOTE
+      </button>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroSection -->
+<section class="py-24 bg-white">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">Expert Solutions for the Digital Age</h1>
+<p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+        We bridge the gap between complex business challenges and cutting-edge technology. Our specialized teams deliver scalable, high-performance digital products.
+      </p>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-7xl mx-auto px-6 py-16 space-y-32">
+<!-- BEGIN: DevOpsSection -->
+<section class="grid md:grid-cols-2 gap-16 items-center" data-purpose="service-category" id="devops">
+<div class="order-2 md:order-1">
+<div class="inline-block bg-accent/30 text-gray-900 px-3 py-1 text-xs font-bold mb-4 uppercase tracking-widest rounded">Efficiency</div>
+<h2 class="text-3xl font-bold mb-6 text-gray-900">DevOps &amp; Cloud Engineering</h2>
+<p class="text-gray-600 mb-6 leading-relaxed">
+          Streamline your development lifecycle with our robust DevOps practices. We focus on automation, scalability, and security to ensure your infrastructure evolves with your business.
+        </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Cloud Infrastructure:</strong> Expert architecture on AWS, Azure, and GCP.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Kubernetes (K8s):</strong> Orchestration for containerized application scaling.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>CI/CD Pipelines:</strong> Fully automated testing and deployment workflows.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Security (DevSecOps):</strong> Integrated security protocols at every stage.</span>
+</li>
+</ul>
+<a class="inline-flex items-center font-bold text-gray-900 border-b-2 border-accent pb-1 hover:border-accent-dark transition-all" href="#">
+          Learn More About DevOps
+          <svg class="h-4 w-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<div class="order-1 md:order-2 aspect-video rounded-custom overflow-hidden shadow-lg">
+<img alt="DevOps and Cloud" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI6iFHBP4rbOLKduxMhqmCUzF_ulKgxTczZqknXINeFNbGPuxdJDimuz7Ykv-aVBN78wLTlIh3Zy4pNrh_yehfBF-nAUcS34tIdOZVMcnuemRu2wzW55RA3uvhsxoHqu5BH0YUYPUXw9cXpTJr8HY7c2LKK7CmCBRhd9nxLhVBhU3EdLGyQtUSOlXSdgVezVUNF5uMVUByx27DlmmrzdGe5it4V7O2qaWE8bVOTlEuV3a7bjdAr2m-S5jk3mnk8EIEzxBGMkIFPEU"/>
+</div>
+</section>
+<!-- END: DevOpsSection -->
+<!-- BEGIN: AISection -->
+<section class="grid md:grid-cols-2 gap-16 items-center" data-purpose="service-category" id="ai-ml">
+<div class="aspect-video rounded-custom overflow-hidden shadow-lg">
+<img alt="AI and Machine Learning" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNpnAWgzvdYj_IBnBSCkJKeFak3_iaXfcN6PXc-O44TZamqWf1IXgZfk9QsvDYuOtdJXLxjcTf6yqxXady5RfpUfij9Usz37mrkvgmaK-XoKhuX-Y-4CqT0GJFzrYjzoXqwalwU_56PAehyTErh9ilN6Azc4LaZdyegyy1EVuqiobDa_MQ4nYIWZsC1aZ8K8I_7B9vJBPP_cTqMIok1eEPziVvrL8NvRmZjE4nDW_aY-B26-HXh0KODc-inaO-xbFRiP7lFas-YO8"/>
+</div>
+<div>
+<div class="inline-block bg-accent/30 text-gray-900 px-3 py-1 text-xs font-bold mb-4 uppercase tracking-widest rounded">Intelligence</div>
+<h2 class="text-3xl font-bold mb-6 text-gray-900">AI &amp; Machine Learning</h2>
+<p class="text-gray-600 mb-6 leading-relaxed">
+          Harness the power of data. We build intelligent systems that predict trends, automate customer interactions, and provide actionable insights for your business.
+        </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Intelligent Chatbots:</strong> NLP-driven solutions for automated support.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Predictive Analytics:</strong> Forecasting models to drive business strategy.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Computer Vision:</strong> Image and video processing applications.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Data Mining:</strong> Extracting patterns from complex datasets.</span>
+</li>
+</ul>
+<a class="inline-flex items-center font-bold text-gray-900 border-b-2 border-accent pb-1 hover:border-accent-dark transition-all" href="#">
+          Learn More About AI
+          <svg class="h-4 w-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</section>
+<!-- END: AISection -->
+<!-- BEGIN: WebDevSection -->
+<section class="grid md:grid-cols-2 gap-16 items-center" data-purpose="service-category" id="web-dev">
+<div class="order-2 md:order-1">
+<div class="inline-block bg-accent/30 text-gray-900 px-3 py-1 text-xs font-bold mb-4 uppercase tracking-widest rounded">Scalability</div>
+<h2 class="text-3xl font-bold mb-6 text-gray-900">Web Development</h2>
+<p class="text-gray-600 mb-6 leading-relaxed">
+          We build robust web applications that serve millions. From complex SaaS platforms to seamless API integrations, our web solutions are designed for longevity.
+        </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>SaaS Platforms:</strong> Multitenant architectures and subscription management.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Custom APIs:</strong> Secure and well-documented RESTful &amp; GraphQL APIs.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Performance Optimization:</strong> Lightning-fast load times and SEO.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Modern Tech Stack:</strong> Expertise in React, Next.js, Node.js, and Python.</span>
+</li>
+</ul>
+<a class="inline-flex items-center font-bold text-gray-900 border-b-2 border-accent pb-1 hover:border-accent-dark transition-all" href="#">
+          Learn More About Web
+          <svg class="h-4 w-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<div class="order-1 md:order-2 aspect-video rounded-custom overflow-hidden shadow-lg">
+<img alt="Web Development" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0O7FGc6hZV8Af0yCwC2oViBvWjKAX9vcX9PmvITazGTN3mFFO_7Zp3efU9b2uj6bpxuTxP3pKP-x9ZwYE6rsrsj3OrYLd5Qg9a0v5oSOWecIn1pgmv-SunzegrUSxSrr9Zj-p0czEZdeqlPEhgkBXdK4ri9rNXUBBP6ATDI33WmpdBhCQuM6nGDiTTdyYFGHVaysd3SkYQ-cau2hzFoJUcCaoAKYa7gHwNpGFkENnmbV_r9V5kQmfsGm1Ipt6Ui3rlrkC9MVeDSQ"/>
+</div>
+</section>
+<!-- END: WebDevSection -->
+<!-- BEGIN: MobileDevSection -->
+<section class="grid md:grid-cols-2 gap-16 items-center pb-12" data-purpose="service-category" id="mobile-dev">
+<div class="aspect-video rounded-custom overflow-hidden shadow-lg">
+<img alt="Mobile Development" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChIM1i6cQRFw5DsT2pn38YoicMfANhH_3sVnC5Q1So5eBMpqKjyFgqrCyVYtCMO9uNyWgtjWeJLWgFyA9n77-gQDsD5T3QL6D47BMwSGu6jwBt5d9NSM0TlYVCLPSLelZXgdCBnXhz7oxCIAemEJ1PtU3EFQMBhPfkQ9J4i05ne9d8FI-_DQwOIr5TLgGJifxE_zHNqr704lUnzcAO2ydAIV_7YiTkYGozp8HMH1Rs_fipcBFucGUUy6g6N37O3BLxUuASC0MoVxQ"/>
+</div>
+<div>
+<div class="inline-block bg-accent/30 text-gray-900 px-3 py-1 text-xs font-bold mb-4 uppercase tracking-widest rounded">Mobility</div>
+<h2 class="text-3xl font-bold mb-6 text-gray-900">Mobile Development</h2>
+<p class="text-gray-600 mb-6 leading-relaxed">
+          Create engaging mobile experiences. We develop native and cross-platform mobile apps that provide a seamless user journey on any device.
+        </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>iOS &amp; Android:</strong> High-performance native applications.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Flutter &amp; React Native:</strong> Efficient cross-platform development.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>Mobile UI/UX:</strong> Intuitive design for mobile-first users.</span>
+</li>
+<li class="flex items-start">
+<span class="text-accent-dark mr-3 mt-1">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</span>
+<span class="text-gray-700"><strong>App Store Deployment:</strong> Full support for store submissions and compliance.</span>
+</li>
+</ul>
+<a class="inline-flex items-center font-bold text-gray-900 border-b-2 border-accent pb-1 hover:border-accent-dark transition-all" href="#">
+          Learn More About Mobile
+          <svg class="h-4 w-4 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</section>
+<!-- END: MobileDevSection -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: CTASection -->
+<section class="bg-gray-900 text-white py-24" data-purpose="contact-cta">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<h2 class="text-4xl font-bold mb-8">Ready to transform your business?</h2>
+<p class="text-gray-400 mb-12 max-w-2xl mx-auto text-lg">
+        Our consultants are ready to discuss your project requirements and help you find the best technological path forward.
+      </p>
+<div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+<a class="bg-accent text-accent-text px-10 py-5 text-lg font-extrabold rounded-custom hover:bg-accent-dark transition-colors" href="#">Book a Free Discovery Call</a>
+<a class="border border-white/30 text-white px-8 py-4 font-bold rounded-custom hover:bg-white/10 transition-colors" href="#">Download Case Studies</a>
+</div>
+</div>
+</section>
+<!-- END: CTASection -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-gray-100 py-16">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div>
+<div class="text-xl font-extrabold mb-6">TECHCONSULT</div>
+<p class="text-gray-500 text-sm leading-relaxed">Empowering enterprises through innovative software engineering and strategic consulting.</p>
+</div>
+<div>
+<h4 class="font-bold text-gray-900 mb-6">Services</h4>
+<ul class="text-sm text-gray-500 space-y-4">
+<li><a class="hover:text-accent-dark transition-colors" href="#">DevOps &amp; Cloud</a></li>
+<li><a class="hover:text-accent-dark transition-colors" href="#">AI/ML Analytics</a></li>
+<li><a class="hover:text-accent-dark transition-colors" href="#">Web Development</a></li>
+<li><a class="hover:text-accent-dark transition-colors" href="#">Mobile Solutions</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-gray-900 mb-6">Company</h4>
+<ul class="text-sm text-gray-500 space-y-4">
+<li><a class="hover:text-accent-dark transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-accent-dark transition-colors" href="#">Career</a></li>
+<li><a class="hover:text-accent-dark transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-accent-dark transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-gray-900 mb-6">Connect</h4>
+<div class="flex space-x-6">
+<a class="text-gray-400 hover:text-accent-dark transition-colors" href="#">
+<span class="sr-only">LinkedIn</span>
+<svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<a class="text-gray-400 hover:text-accent-dark transition-colors" href="#">
+<span class="sr-only">Twitter</span>
+<svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-gray-100 text-center text-xs text-gray-400 uppercase tracking-widest">
+      © 2023 TechConsult Agency. All rights reserved.
+    </div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

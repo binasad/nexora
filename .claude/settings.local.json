@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"C:\\\\Users\\\\Admin\\\\Desktop\\\\servicebusiness\"/*.html)",
+      "WebFetch(domain:www.ada.cx)"
+    ]
+  }
+}

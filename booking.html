@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book a Call | Nexora</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F9F9F7; color: #1C1C22; margin: 0; }
+
+  .nav-wrap { position: sticky; top: 0; z-index: 50; transition: background 0.3s, box-shadow 0.3s; }
+  .nav-wrap.scrolled { background: rgba(249,249,247,0.92); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.07); }
+
+  .btn-pill-dark { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:#1C1C22; color:#fff; border-radius:9999px; font-size:0.9375rem; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.15s; cursor:pointer; border:none; font-family:'Manrope',sans-serif; }
+  .btn-pill-dark:hover { background:#0D5C3A; transform:translateY(-1px); }
+  .btn-pill-nav { display:inline-flex; align-items:center; gap:0.6rem; padding:0.6rem 1.2rem; background:#DDD6FE; color:#1C1C22; border-radius:9999px; font-size:0.875rem; font-weight:600; text-decoration:none; transition:opacity 0.2s; }
+  .btn-pill-nav:hover { opacity:0.85; }
+  .btn-pill-ghost-white { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.3); border-radius:9999px; font-size:0.9375rem; font-weight:500; text-decoration:none; transition:all 0.2s; }
+  .btn-pill-ghost-white:hover { background:rgba(255,255,255,0.08); }
+
+  .arr { width:2rem; height:2rem; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .arr-dark { width:2rem; height:2rem; background:#1C1C22; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  /* CALENDAR */
+  .cal-day { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:0.5rem; font-size:0.875rem; font-weight:500; cursor:pointer; transition:all 0.15s; }
+  .cal-day:hover:not(.cal-day-empty):not(.cal-day-past) { background:#B3EBF2; color:#1C1C22; }
+  .cal-day.cal-day-selected { background:#0D5C3A; color:#fff; }
+  .cal-day.cal-day-past { color:#d1d5db; cursor:default; }
+  .cal-day.cal-day-empty { cursor:default; }
+  .cal-day.cal-day-today { font-weight:700; color:#0D5C3A; }
+  .cal-day.cal-day-today.cal-day-selected { color:#fff; }
+
+  /* TIME SLOT */
+  .time-slot { padding:0.625rem 1rem; border:1.5px solid #e5e7eb; border-radius:0.625rem; font-size:0.875rem; font-weight:500; cursor:pointer; transition:all 0.15s; text-align:center; color:#1C1C22; }
+  .time-slot:hover { border-color:#0D5C3A; background:#F0FDF4; }
+  .time-slot.selected { background:#0D5C3A; color:#fff; border-color:#0D5C3A; }
+
+  /* FORM FIELD */
+  .form-field { width:100%; padding:0.75rem 1rem; background:#fff; border:1.5px solid #e5e7eb; border-radius:0.75rem; font-family:'Manrope',sans-serif; font-size:0.9375rem; color:#1C1C22; transition:border-color 0.2s,box-shadow 0.2s; outline:none; }
+  .form-field:focus { border-color:#0D5C3A; box-shadow:0 0 0 3px rgba(13,92,58,0.1); }
+  .form-field::placeholder { color:#9ca3af; }
+  select.form-field { -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; cursor:pointer; }
+
+  /* STEP INDICATORS */
+  .step-dot { width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; transition:all 0.2s; }
+  .step-dot.active { background:#0D5C3A; color:#fff; }
+  .step-dot.done { background:#B3EBF2; color:#0D5C3A; }
+  .step-dot.inactive { background:#f3f4f6; color:#9ca3af; }
+  .step-line { flex:1; height:2px; background:#e5e7eb; transition:background 0.2s; }
+  .step-line.done { background:#B3EBF2; }
+
+  /* BOOKING STEP PANELS */
+  .booking-step { display:none; }
+  .booking-step.active { display:block; }
+
+  /* CONFIRMATION */
+  #confirmPanel { display:none; }
+  #confirmPanel.show { display:block; }
+
+  /* POPUP */
+  #engagePopup { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(120px); z-index:100; width:min(90vw,480px); background:#fff; border-radius:1.25rem; box-shadow:0 24px 64px rgba(0,0,0,0.14); border-top:3px solid #B3EBF2; padding:1.75rem; transition:transform 0.45s cubic-bezier(0.34,1.56,0.64,1); }
+  #engagePopup.show { transform:translateX(-50%) translateY(0); }
+
+  #mobileMenu { display:none; }
+  #mobileMenu.open { display:block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar" class="nav-wrap" style="background:rgba(249,249,247,0.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,0.07);">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="text-xl font-bold tracking-tight" style="color:#0D5C3A;letter-spacing:-0.03em;">Nexora</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+      <a href="services.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Services</a>
+      <a href="about.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">About</a>
+      <a href="contact.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Contact</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="booking.html" class="btn-pill-nav" style="background:#0D5C3A;color:#fff;">
+        Book a call
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+    <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="#1C1C22" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="md:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-3">
+    <a href="index.html" class="block text-sm font-medium text-gray-700 py-1">Home</a>
+    <a href="services.html" class="block text-sm font-medium text-gray-700 py-1">Services</a>
+    <a href="about.html" class="block text-sm font-medium text-gray-700 py-1">About</a>
+    <a href="contact.html" class="block text-sm font-medium text-gray-700 py-1">Contact</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="py-16 md:py-20" style="background:#F9F9F7;">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style="color:#0D5C3A;">Schedule a Meeting</span>
+    <h1 class="font-normal leading-tight mb-4" style="font-size:clamp(2.25rem,5vw,3.5rem);letter-spacing:-0.03em;color:#1C1C22;">
+      Book a <em style="color:#0D5C3A;font-style:italic;">free 30-minute</em> discovery call
+    </h1>
+    <p class="text-base leading-relaxed text-gray-600 max-w-xl mx-auto">
+      No sales pitch. Just an honest conversation about what you're building and how we might help. One of our senior engineers will join.
+    </p>
+  </div>
+</section>
+
+<!-- BOOKING WIDGET -->
+<section class="pb-24" style="background:#F9F9F7;">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- STEP INDICATORS -->
+    <div class="flex items-center mb-10 max-w-sm mx-auto">
+      <div id="step-dot-1" class="step-dot active">1</div>
+      <div id="step-line-1" class="step-line mx-2"></div>
+      <div id="step-dot-2" class="step-dot inactive">2</div>
+      <div id="step-line-2" class="step-line mx-2"></div>
+      <div id="step-dot-3" class="step-dot inactive">3</div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div id="bookingCard" style="background:#fff;border-radius:1.5rem;border:1px solid rgba(0,0,0,0.06);overflow:hidden;">
+      <div class="grid md:grid-cols-5">
+
+        <!-- LEFT PANEL -->
+        <div class="md:col-span-2 p-8" style="background:#1C1C22;color:#fff;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6" style="background:#0D5C3A;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" stroke="#fff" stroke-width="1.75"/><path d="M8 2v4M16 2v4M3 10h18" stroke="#fff" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="font-bold text-xl mb-1" style="letter-spacing:-0.02em;">Discovery Call</div>
+          <div class="text-sm mb-6" style="color:rgba(255,255,255,0.6);">Nexora Engineering Team</div>
+
+          <div class="space-y-4 text-sm">
+            <div class="flex items-center gap-3">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#B3EBF2" stroke-width="1.4"/><path d="M9 5.25V9l2.25 2.25" stroke="#B3EBF2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span style="color:rgba(255,255,255,0.8);">30 minutes</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM6 9a3 3 0 106 0 3 3 0 00-6 0z" stroke="#B3EBF2" stroke-width="1.4"/></svg>
+              <span style="color:rgba(255,255,255,0.8);">Google Meet / Zoom</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 9a3.75 3.75 0 100-7.5A3.75 3.75 0 009 9zm-6 7.5c0-3.314 2.686-6 6-6h0c3.314 0 6 2.686 6 6" stroke="#B3EBF2" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span style="color:rgba(255,255,255,0.8);">Senior engineer joins</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-8" style="border-top:1px solid rgba(255,255,255,0.1);">
+            <div class="text-xs font-semibold tracking-widest uppercase mb-3" style="color:rgba(255,255,255,0.4);">What to expect</div>
+            <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.7);">
+              <li class="flex items-start gap-2"><span style="color:#B3EBF2;margin-top:2px;">•</span>Understand your project goals</li>
+              <li class="flex items-start gap-2"><span style="color:#B3EBF2;margin-top:2px;">•</span>Discuss technical approach</li>
+              <li class="flex items-start gap-2"><span style="color:#B3EBF2;margin-top:2px;">•</span>Rough timeline &amp; budget range</li>
+              <li class="flex items-start gap-2"><span style="color:#B3EBF2;margin-top:2px;">•</span>Next steps if it's a fit</li>
+            </ul>
+          </div>
+
+          <!-- Selected info panel -->
+          <div id="selectedInfo" class="mt-6 pt-6 hidden" style="border-top:1px solid rgba(255,255,255,0.1);">
+            <div class="text-xs font-semibold tracking-widest uppercase mb-3" style="color:rgba(255,255,255,0.4);">Your selection</div>
+            <div id="selectedDate" class="text-sm font-semibold mb-1" style="color:#B3EBF2;"></div>
+            <div id="selectedTime" class="text-sm" style="color:rgba(255,255,255,0.7);"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="md:col-span-3 p-8">
+
+          <!-- STEP 1: Calendar -->
+          <div id="step1" class="booking-step active">
+            <h2 class="font-semibold text-lg mb-1" style="color:#1C1C22;">Select a date</h2>
+            <p class="text-sm text-gray-500 mb-6">Choose a day that works for you</p>
+
+            <!-- Calendar Nav -->
+            <div class="flex items-center justify-between mb-4">
+              <button onclick="prevMonth()" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13L7 9l4-4" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <span id="monthLabel" class="font-semibold text-sm" style="color:#1C1C22;"></span>
+              <button onclick="nextMonth()" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 13l4-4-4-4" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            <!-- Day headers -->
+            <div class="grid grid-cols-7 gap-1 mb-1">
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">Su</div>
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">Mo</div>
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">Tu</div>
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">We</div>
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">Th</div>
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">Fr</div>
+              <div class="text-center text-xs font-semibold text-gray-400 py-1">Sa</div>
+            </div>
+            <div id="calGrid" class="grid grid-cols-7 gap-1"></div>
+
+            <div class="mt-6 pt-6" style="border-top:1px solid #f3f4f6;">
+              <div class="text-xs text-gray-400">Times shown in <span class="font-semibold text-gray-600">Pacific Time (PT)</span></div>
+            </div>
+          </div>
+
+          <!-- STEP 2: Time slots -->
+          <div id="step2" class="booking-step">
+            <div class="flex items-center gap-3 mb-6">
+              <button onclick="goStep(1)" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13L7 9l4-4" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div>
+                <h2 class="font-semibold text-lg" style="color:#1C1C22;">Select a time</h2>
+                <p id="step2DateLabel" class="text-sm text-gray-500"></p>
+              </div>
+            </div>
+
+            <div id="timeGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6"></div>
+
+            <div class="pt-6" style="border-top:1px solid #f3f4f6;">
+              <div class="text-xs text-gray-400">Times in <span class="font-semibold text-gray-600">Pacific Time (PT)</span> · 30 min sessions</div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Details form -->
+          <div id="step3" class="booking-step">
+            <div class="flex items-center gap-3 mb-6">
+              <button onclick="goStep(2)" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13L7 9l4-4" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div>
+                <h2 class="font-semibold text-lg" style="color:#1C1C22;">Your details</h2>
+                <p class="text-sm text-gray-500">So we can send a calendar invite</p>
+              </div>
+            </div>
+
+            <form id="bookingForm" onsubmit="confirmBooking(event)" class="space-y-4">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-semibold mb-1.5" style="color:#1C1C22;">First name <span style="color:#ef4444;">*</span></label>
+                  <input type="text" class="form-field" placeholder="Marcus" required/>
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold mb-1.5" style="color:#1C1C22;">Last name <span style="color:#ef4444;">*</span></label>
+                  <input type="text" class="form-field" placeholder="Chen" required/>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-1.5" style="color:#1C1C22;">Work email <span style="color:#ef4444;">*</span></label>
+                <input type="email" class="form-field" placeholder="marcus@company.com" required/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-1.5" style="color:#1C1C22;">Company</label>
+                <input type="text" class="form-field" placeholder="Acme Corp"/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-1.5" style="color:#1C1C22;">What are you looking to discuss?</label>
+                <select class="form-field">
+                  <option value="" disabled selected>Select a topic…</option>
+                  <option>Cloud Infrastructure &amp; DevOps</option>
+                  <option>AI &amp; Machine Learning</option>
+                  <option>Web Application Development</option>
+                  <option>Mobile App Development</option>
+                  <option>Technical Audit / Architecture Review</option>
+                  <option>General inquiry</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-1.5" style="color:#1C1C22;">Anything else we should know? <span class="text-gray-400 font-normal">(optional)</span></label>
+                <textarea class="form-field" style="min-height:90px;" placeholder="Brief description of your project or specific questions…"></textarea>
+              </div>
+              <div class="pt-2">
+                <button type="submit" class="btn-pill-dark w-full justify-center" style="font-size:1rem;">
+                  Confirm booking
+                  <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION PANEL -->
+    <div id="confirmPanel" style="background:#fff;border-radius:1.5rem;border:1px solid rgba(0,0,0,0.06);padding:4rem 2rem;text-align:center;">
+      <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style="background:#B3EBF2;">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M6 18l8 8 16-16" stroke="#0D5C3A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="font-semibold mb-3" style="font-size:1.75rem;letter-spacing:-0.03em;color:#1C1C22;">You're booked!</h2>
+      <p class="text-gray-500 mb-2">A calendar invite has been sent to your email.</p>
+      <div id="confirmDetails" class="inline-block text-sm font-semibold mb-8 px-4 py-2 rounded-full" style="background:#F0FDF4;color:#0D5C3A;"></div>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="index.html" class="btn-pill-dark">
+          Back to home
+          <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a href="services.html" class="btn-pill-ghost-white" style="color:#1C1C22;border-color:#e5e7eb;">
+          Explore services
+          <span style="width:2rem;height:2rem;background:#f3f4f6;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="py-16" style="background:#1C1C22;">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-content-center flex-shrink-0" style="background:rgba(179,235,242,0.12);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1.67L12.06 7.06H17.5L13.22 10.33L14.78 15.83L10 12.5L5.22 15.83L6.78 10.33L2.5 7.06H7.94L10 1.67Z" stroke="#B3EBF2" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold text-sm mb-1" style="color:#fff;">No commitment required</div>
+          <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.5);">This is an exploratory call. You're not signing anything or making any decisions.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-content-center flex-shrink-0" style="background:rgba(179,235,242,0.12);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6.5 10.5l2.5 2.5 5-5" stroke="#B3EBF2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold text-sm mb-1" style="color:#fff;">Senior engineer guaranteed</div>
+          <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.5);">You'll always speak with a senior engineer — never a salesperson or BDR.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-content-center flex-shrink-0" style="background:rgba(179,235,242,0.12);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v4M10 14v4M4.22 4.22l2.83 2.83M12.95 12.95l2.83 2.83M2 10h4M14 10h4M4.22 15.78l2.83-2.83M12.95 7.05l2.83-2.83" stroke="#B3EBF2" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold text-sm mb-1" style="color:#fff;">Quick follow-up</div>
+          <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.5);">After the call, we'll send a written summary of what we discussed and any next steps within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#111117;color:rgba(255,255,255,0.55);">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
+      <div class="col-span-2">
+        <div class="text-3xl font-bold mb-3" style="color:#0D5C3A;letter-spacing:-0.04em;">Nexora</div>
+        <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(255,255,255,0.45);">Building the software infrastructure that powers ambitious companies.</p>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Services</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="services.html" class="hover:text-white transition-colors">Cloud &amp; DevOps</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">AI &amp; Machine Learning</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">Web Development</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">Mobile Apps</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Company</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="booking.html" class="hover:text-white transition-colors">Book a Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Contact</div>
+        <ul class="space-y-2 text-sm">
+          <li>hello@nexora.dev</li>
+          <li>+1 (415) 555-0192</li>
+          <li>San Francisco, CA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t pt-8 flex flex-col md:flex-row justify-between gap-4 text-xs" style="border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);">
+      <span>© 2024 Nexora Technologies, Inc. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ENGAGEMENT POPUP -->
+<div id="engagePopup">
+  <button onclick="document.getElementById('engagePopup').classList.remove('show');sessionStorage.setItem('popupSeen','1');" style="position:absolute;top:1rem;right:1rem;width:1.75rem;height:1.75rem;border-radius:50%;background:#f3f4f6;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#0D5C3A;">You're almost there</div>
+  <h3 class="font-semibold text-lg mb-2" style="color:#1C1C22;letter-spacing:-0.02em;">Need help picking a time?</h3>
+  <p class="text-sm leading-relaxed text-gray-500 mb-4">Send us a message instead and we'll find a time that works for you.</p>
+  <a href="contact.html" onclick="sessionStorage.setItem('popupSeen','1');" class="btn-pill-dark" style="width:100%;justify-content:center;">
+    Send a message
+    <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+</div>
+
+<script>
+  // ── NAV ──────────────────────────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ── POPUP ─────────────────────────────────────────────────────────────
+  if (!sessionStorage.getItem('popupSeen')) {
+    setTimeout(() => document.getElementById('engagePopup').classList.add('show'), 2500);
+  }
+
+  // ── CALENDAR STATE ────────────────────────────────────────────────────
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS_ABBR = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const TIME_SLOTS = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM'];
+
+  let now = new Date();
+  let viewYear = now.getFullYear();
+  let viewMonth = now.getMonth();
+  let selectedDate = null;
+  let selectedTimeStr = null;
+
+  function renderCalendar() {
+    document.getElementById('monthLabel').textContent = MONTHS[viewMonth] + ' ' + viewYear;
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // blank cells
+    for (let i = 0; i < firstDay; i++) {
+      const blank = document.createElement('div');
+      blank.className = 'cal-day cal-day-empty';
+      grid.appendChild(blank);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(viewYear, viewMonth, d);
+      const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+      const isPast = date < today;
+      const isToday = date.getTime() === today.getTime();
+      const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
+
+      const cell = document.createElement('div');
+      cell.textContent = d;
+      cell.className = 'cal-day' +
+        (isSelected ? ' cal-day-selected' : '') +
+        (isPast || isWeekend ? ' cal-day-past' : '') +
+        (isToday && !isSelected ? ' cal-day-today' : '');
+
+      if (!isPast && !isWeekend) {
+        cell.addEventListener('click', () => selectDate(date));
+      }
+      grid.appendChild(cell);
+    }
+  }
+
+  function selectDate(date) {
+    selectedDate = date;
+    renderCalendar();
+    // populate step 2
+    const label = date.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+    document.getElementById('step2DateLabel').textContent = label;
+    renderTimeSlots();
+    goStep(2);
+
+    // update sidebar
+    document.getElementById('selectedDate').textContent = label;
+    document.getElementById('selectedInfo').classList.remove('hidden');
+  }
+
+  function renderTimeSlots() {
+    const grid = document.getElementById('timeGrid');
+    grid.innerHTML = '';
+    TIME_SLOTS.forEach(t => {
+      const slot = document.createElement('div');
+      slot.className = 'time-slot' + (t === selectedTimeStr ? ' selected' : '');
+      slot.textContent = t;
+      slot.addEventListener('click', () => selectTime(t));
+      grid.appendChild(slot);
+    });
+  }
+
+  function selectTime(t) {
+    selectedTimeStr = t;
+    renderTimeSlots();
+    document.getElementById('selectedTime').textContent = t + ' PT';
+    goStep(3);
+  }
+
+  function prevMonth() {
+    viewMonth--;
+    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+    renderCalendar();
+  }
+  function nextMonth() {
+    viewMonth++;
+    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+    renderCalendar();
+  }
+
+  // ── STEP NAVIGATION ───────────────────────────────────────────────────
+  function goStep(n) {
+    [1,2,3].forEach(i => {
+      document.getElementById('step' + i).classList.toggle('active', i === n);
+      const dot = document.getElementById('step-dot-' + i);
+      if (i < n) { dot.className = 'step-dot done'; dot.innerHTML = '✓'; }
+      else if (i === n) { dot.className = 'step-dot active'; dot.textContent = i; }
+      else { dot.className = 'step-dot inactive'; dot.textContent = i; }
+    });
+    [1,2].forEach(i => {
+      const line = document.getElementById('step-line-' + i);
+      line.classList.toggle('done', i < n);
+    });
+  }
+
+  // ── CONFIRM BOOKING ───────────────────────────────────────────────────
+  function confirmBooking(e) {
+    e.preventDefault();
+    const label = selectedDate ? selectedDate.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) : '';
+    document.getElementById('confirmDetails').textContent = label + ' · ' + (selectedTimeStr || '') + ' PT';
+    document.getElementById('bookingCard').style.display = 'none';
+    document.getElementById('confirmPanel').classList.add('show');
+    // hide step indicators
+    document.querySelector('.flex.items-center.mb-10').style.display = 'none';
+    sessionStorage.setItem('popupSeen', '1');
+    document.getElementById('engagePopup').classList.remove('show');
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────
+  renderCalendar();
+</script>
+</body>
+</html>

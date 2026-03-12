@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Tech Scale Consulting</title>
+<!-- BEGIN: Scripts and Configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              light: '#F8FAFC',
+              base: '#E2E8F0',
+              dark: '#64748B',
+              accent: '#B3EBF2' // Theme Primary Accent
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px', // ROUND_EIGHT from theme
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Scripts and Configuration -->
+<style data-purpose="custom-layout">
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+    }
+    .hero-gradient {
+      background: linear-gradient(180deg, #E2E8F0 0%, #F8FAFC 100%);
+    }
+    .card-border {
+      border: 1px solid #E2E8F0;
+    }
+    .rounded-theme {
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="antialiased font-sans">
+<!-- BEGIN: Navigation -->
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-brand-base px-6 py-4" data-purpose="main-navigation">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<div class="text-xl font-bold tracking-tighter" data-purpose="logo">
+        TECH<span class="text-brand-dark">SCALE</span>
+</div>
+<div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest">
+<a class="hover:text-brand-dark transition-colors" href="#">Home</a>
+<a class="border-b-2 border-brand-accent" href="#">About</a>
+<a class="hover:text-brand-dark transition-colors" href="#">Services</a>
+<a class="hover:text-brand-dark transition-colors" href="#">Contact</a>
+</div>
+<button class="bg-brand-accent text-slate-900 px-6 py-2 text-sm font-bold hover:brightness-95 transition-all rounded-theme">
+        Get Started
+      </button>
+</div>
+</nav>
+<!-- END: Navigation -->
+<main>
+<!-- BEGIN: Hero Section -->
+<section class="hero-gradient pt-24 pb-16 px-6" data-purpose="hero-mission">
+<div class="max-w-4xl mx-auto text-center">
+<h1 class="text-5xl md:text-7xl font-light mb-8 tracking-tight text-slate-900">
+          Empowering the next generation of <span class="font-bold italic text-brand-dark">innovators</span>.
+        </h1>
+<p class="text-xl md:text-2xl text-slate-600 leading-relaxed mb-12">
+          We bridge the gap between initial code and global scale. Our mission is to provide startups with the architectural backbone and strategic engineering they need to disrupt markets.
+        </p>
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Core Values -->
+<section class="py-24 px-6 bg-white" data-purpose="core-values">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Value 1 -->
+<div class="p-8 card-border rounded-theme bg-white shadow-sm" data-purpose="value-card">
+<span class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-4 block">01 / Focus</span>
+<h3 class="text-2xl font-semibold mb-4 text-slate-900">Precision Engineering</h3>
+<p class="text-slate-600">We don't just build features; we build systems designed for high-velocity growth and long-term stability.</p>
+</div>
+<!-- Value 2 -->
+<div class="p-8 card-border rounded-theme bg-white shadow-sm" data-purpose="value-card">
+<span class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-4 block">02 / Ethos</span>
+<h3 class="text-2xl font-semibold mb-4 text-slate-900">Radical Transparency</h3>
+<p class="text-slate-600">Honest feedback and clear communication are the foundations of our consulting partnership.</p>
+</div>
+<!-- Value 3 -->
+<div class="p-8 card-border rounded-theme bg-white shadow-sm" data-purpose="value-card">
+<span class="text-xs font-bold uppercase tracking-widest text-brand-dark mb-4 block">03 / Goal</span>
+<h3 class="text-2xl font-semibold mb-4 text-slate-900">Sustainable Scaling</h3>
+<p class="text-slate-600">Growth is meaningless if it breaks your product. We ensure your tech stack matures with your user base.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Core Values -->
+<!-- BEGIN: Team Section -->
+<section class="py-24 px-6 bg-brand-light" data-purpose="team-section" id="team">
+<div class="max-w-7xl mx-auto text-center mb-16">
+<h2 class="text-3xl font-bold uppercase tracking-tighter mb-4 text-slate-900">Meet the Experts</h2>
+<div class="w-16 h-1 bg-brand-accent mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<!-- Team Member Placeholder 1 -->
+<div class="group" data-purpose="team-member">
+<div class="aspect-square bg-brand-base mb-4 overflow-hidden rounded-theme">
+<img alt="Team Member" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6aBcDm5pNa8t_3OQX7OAbs0LSdP6rw3llFqCFIuwR-gr7Z91X_Ow6ZgUhrtmj-kDb9hkfiUoxbgEZtiUlUlg9A6gEgQEQbmjkyki2JvxEir9mbg-fFd9t27r5SRxZLc_Pmmuz-S8RKAEry-rlOiAhHCM6rUT6m6zcIt0VGSXME9KgJvCueQKi-C9vHIVy_RGJCrK3Jjl3cuv6P_RKH6X3zzJ1NawDhliUgM_V5nzR7CpTUfuvfDpUz6Se3vCmDNhukrNjcqh7T4E"/>
+</div>
+<h4 class="text-lg font-bold text-slate-900">Alex Rivers</h4>
+<p class="text-sm text-brand-dark uppercase tracking-widest">Founder &amp; CTO</p>
+</div>
+<!-- Team Member Placeholder 2 -->
+<div class="group" data-purpose="team-member">
+<div class="aspect-square bg-brand-base mb-4 overflow-hidden rounded-theme">
+<img alt="Team Member" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi0UhH8QyOslFiWvGIEiJezbgZ94pVj5BcypSRqU_9dLMuqZo6NGmHTnJo3EwtgbXoUQZTGGoMlhCmzH1W6S00l02EwKwC8ddKelc9H_aURUuEjd2z_gc99VdDbjH-SvxQ_ALsDm0qwF-ruskwHiUr3c00A3RMXYlCqAkYHMd7OBUbY3dtTVhZbFy04v-S3gfE7NypD0J9OV0kkfvTGtzC0iCC9JvCJ_xUKdZXHyvm4Q0l2MjFhgil8sEdSobfD_iRJXHZWzbQsCc"/>
+</div>
+<h4 class="text-lg font-bold text-slate-900">Morgan Chen</h4>
+<p class="text-sm text-brand-dark uppercase tracking-widest">Head of Scale</p>
+</div>
+<!-- Team Member Placeholder 3 -->
+<div class="group" data-purpose="team-member">
+<div class="aspect-square bg-brand-base mb-4 overflow-hidden rounded-theme">
+<img alt="Team Member" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRl0Vh85perC4Ah_Nko7h_Ozaw5ion71WJ05xKtGUSHTlq3DcCMcX4ShDJbN9mWOdW-jjWHigHERrL8wDfehFNiRyw5qMPq0yNKPirCE0j0oRDNjDIkd8R5hIY8vdhcJ6jX-JDdx_W0XvWipZJrJ0JDNvPVO23axoeAaYY596kMkasZm1xprE8NM7hLGEhbJNaKzPVihKZBYl4lJ0libHhF-48JZwrIUXpSCmX6Lu3oH16q9eHW2umR88l94dZY01LjHMqimkCLKE"/>
+</div>
+<h4 class="text-lg font-bold text-slate-900">Jordan Smith</h4>
+<p class="text-sm text-brand-dark uppercase tracking-widest">Strategic Ops</p>
+</div>
+<!-- Team Member Placeholder 4 -->
+<div class="group" data-purpose="team-member">
+<div class="aspect-square bg-brand-base mb-4 overflow-hidden rounded-theme">
+<img alt="Team Member" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXFrHQbsczG5wNVhYp31NH9wWhurrln40i0CPVWBR-YrhkNK9KsOb-zALOZQ3ehw5_j01jJpD2ZcxM_ztHifEfE1RwmiiyfbQkUlt2TCeh2jVlNP-jiV8P6baib-DCpqQfUkEkVRh15FkoY_jEgj4o_JtTNuvlLxJ1MMLxmZq2fB8dG2xr1dPBQTrNWLB8mJTGC_Za7NhEuanJU-OLzpSgH6PXsUpI6Boi4zrpufuguV-armohcQVG2XHpun8uWnsIqB8SDVhhiS8"/>
+</div>
+<h4 class="text-lg font-bold text-slate-900">Casey Vought</h4>
+<p class="text-sm text-brand-dark uppercase tracking-widest">DevSecOps Lead</p>
+</div>
+</div>
+</section>
+<!-- END: Team Section -->
+<!-- BEGIN: Why Work With Us -->
+<section class="py-24 px-6 bg-white" data-purpose="why-us">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="text-4xl font-bold tracking-tighter mb-6 text-slate-900">Why Work With Us?</h2>
+<p class="text-lg text-slate-600 mb-8">
+            Most agencies deliver code and disappear. We embed ourselves in your team, treating your product as if it were our own. Our success is measured by your ability to scale without us.
+          </p>
+<ul class="space-y-4" data-purpose="benefits-list">
+<li class="flex items-start">
+<span class="h-6 w-6 rounded-theme bg-brand-accent flex items-center justify-center mr-4 mt-1 text-xs font-bold text-slate-900">✓</span>
+<span class="text-slate-700">Proprietary scaling frameworks developed over 100+ projects.</span>
+</li>
+<li class="flex items-start">
+<span class="h-6 w-6 rounded-theme bg-brand-accent flex items-center justify-center mr-4 mt-1 text-xs font-bold text-slate-900">✓</span>
+<span class="text-slate-700">Direct access to senior architects, no junior hand-offs.</span>
+</li>
+<li class="flex items-start">
+<span class="h-6 w-6 rounded-theme bg-brand-accent flex items-center justify-center mr-4 mt-1 text-xs font-bold text-slate-900">✓</span>
+<span class="text-slate-700">Focus on technical debt reduction and future-proofing.</span>
+</li>
+</ul>
+</div>
+<div class="bg-brand-base p-1 rounded-theme" data-purpose="cta-block">
+<div class="bg-slate-900 p-12 text-white text-center rounded-theme">
+<h3 class="text-3xl font-light mb-6">Ready to build for the next million users?</h3>
+<button class="bg-brand-accent text-slate-900 px-10 py-4 font-bold hover:brightness-95 transition-all uppercase tracking-widest text-sm rounded-theme">
+              Schedule a Strategy Call
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Why Work With Us -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-white border-t border-brand-base py-12 px-6" data-purpose="footer">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+<div class="mb-6 md:mb-0">
+        © 2023 TechScale Consulting Group. All rights reserved.
+      </div>
+<div class="flex space-x-12 uppercase tracking-widest text-[10px] font-bold">
+<a class="hover:text-brand-dark transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-brand-dark transition-colors" href="#">Twitter</a>
+<a class="hover:text-brand-dark transition-colors" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

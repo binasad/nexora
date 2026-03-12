@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | Nexora Technologies</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+        colors: { brand: { light: '#F0FBFC', DEFAULT: '#B3EBF2', dark: '#0D5C3A' }, ink: '#1C1C22', canvas: '#F9F9F7' }
+      }
+    }
+  }
+</script>
+<style>
+  body { background:#F9F9F7; color:#1C1C22; font-family:'Manrope',sans-serif; }
+  .btn-pill-dark { display:inline-flex;align-items:center;gap:0.75rem;padding:0.875rem 1.75rem;background:#1C1C22;color:#fff;border-radius:9999px;font-size:0.9375rem;font-weight:500;transition:background 0.2s,transform 0.15s;text-decoration:none; }
+  .btn-pill-dark:hover { background:#0D5C3A; transform:translateY(-1px); }
+  .btn-pill-dark .arr { width:1.875rem;height:1.875rem;background:#fff;border-radius:9999px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+  .btn-pill-nav { display:inline-flex;align-items:center;gap:0.6rem;padding:0.6rem 1.2rem;background:#DDD6FE;color:#1C1C22;border-radius:9999px;font-size:0.875rem;font-weight:600;transition:background 0.2s;text-decoration:none; }
+  .btn-pill-nav:hover { background:#C4B5FD; }
+  .btn-pill-nav .arr { width:1.5rem;height:1.5rem;background:#1C1C22;border-radius:9999px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+  .check-item { display:flex;align-items:flex-start;gap:0.875rem;margin-bottom:1rem; }
+  .check-dot { flex-shrink:0;width:1.375rem;height:1.375rem;background:#B3EBF2;border-radius:9999px;display:flex;align-items:center;justify-content:center;margin-top:0.125rem; }
+  em { font-style:italic; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,0.05);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8" style="height:72px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="display:flex;align-items:center;gap:0.625rem;text-decoration:none;">
+      <div style="width:2rem;height:2rem;background:#0D5C3A;border-radius:10px;display:flex;align-items:center;justify-content:center;"><span style="color:#B3EBF2;font-weight:800;font-size:1rem;letter-spacing:-0.05em;">N</span></div>
+      <span style="font-size:1.1875rem;font-weight:700;letter-spacing:-0.03em;color:#1C1C22;">Nexora</span>
+    </a>
+    <div class="hidden md:flex" style="gap:2rem;align-items:center;">
+      <a href="services.html" style="font-size:0.875rem;font-weight:600;color:#0D5C3A;text-decoration:none;border-bottom:2px solid #B3EBF2;padding-bottom:2px;">Services</a>
+      <a href="about.html"    style="font-size:0.875rem;font-weight:500;color:#6B7280;text-decoration:none;" class="hover:text-ink transition-colors">About</a>
+      <a href="contact.html"  style="font-size:0.875rem;font-weight:500;color:#6B7280;text-decoration:none;" class="hover:text-ink transition-colors">Contact</a>
+    </div>
+    <a href="booking.html" class="btn-pill-nav hidden md:inline-flex">Book a Call <span class="arr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+    <button id="mb" class="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mm" class="hidden md:hidden px-6 pb-4 pt-3 space-y-1 bg-white border-t border-black/5">
+    <a href="services.html" class="block px-4 py-2.5 text-sm font-medium rounded-xl bg-green-50 text-brand-dark">Services</a>
+    <a href="about.html"    class="block px-4 py-2.5 text-sm font-medium rounded-xl hover:bg-gray-50">About</a>
+    <a href="contact.html"  class="block px-4 py-2.5 text-sm font-medium rounded-xl hover:bg-gray-50">Contact</a>
+    <div class="pt-2"><a href="booking.html" class="btn-pill-dark w-full justify-center">Book a Call <span class="arr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#fff;padding:5.5rem 0 4rem;border-bottom:1px solid rgba(0,0,0,0.06);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#0D5C3A;margin-bottom:1rem;">Our expertise</p>
+    <h1 style="font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;line-height:1.0;letter-spacing:-0.025em;max-width:36rem;margin-bottom:1.5rem;">
+      Expert solutions for the <em>digital age</em>
+    </h1>
+    <p style="font-size:1.1875rem;color:#6B7280;max-width:36rem;line-height:1.65;">We bridge the gap between complex challenges and cutting-edge technology. Scalable, high-performance products delivered with precision.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.625rem;margin-top:2rem;">
+      <a href="#web"    style="padding:0.5rem 1rem;background:#F0FDF4;border:1px solid #BBF7D0;color:#0D5C3A;border-radius:9999px;font-size:0.875rem;font-weight:500;text-decoration:none;" class="hover:bg-green-100 transition-colors">Web Engineering</a>
+      <a href="#mobile" style="padding:0.5rem 1rem;background:#FDF2F8;border:1px solid #FBCFE8;color:#9D174D;border-radius:9999px;font-size:0.875rem;font-weight:500;text-decoration:none;" class="hover:bg-pink-100 transition-colors">Mobile Apps</a>
+      <a href="#ai"     style="padding:0.5rem 1rem;background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;border-radius:9999px;font-size:0.875rem;font-weight:500;text-decoration:none;" class="hover:bg-blue-100 transition-colors">AI & Automation</a>
+      <a href="#devops" style="padding:0.5rem 1rem;background:#F0FBFC;border:1px solid #B3EBF2;color:#0D5C3A;border-radius:9999px;font-size:0.875rem;font-weight:500;text-decoration:none;" class="hover:bg-cyan-100 transition-colors">DevOps & Cloud</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<main class="max-w-7xl mx-auto px-6 lg:px-8" style="padding-top:5rem;padding-bottom:5rem;">
+
+  <!-- WEB -->
+  <section id="web" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:7rem;" class="block md:grid">
+    <div class="order-2 md:order-1">
+      <div style="display:inline-block;background:#F0FDF4;color:#0D5C3A;padding:0.25rem 0.875rem;border-radius:9999px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;">Scalability</div>
+      <h2 style="font-size:clamp(1.875rem,3.5vw,3rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;">Web Engineering</h2>
+      <p style="font-size:1rem;color:#6B7280;line-height:1.7;margin-bottom:1.75rem;">We build robust web applications that serve millions. From complex SaaS platforms to seamless API integrations — designed for longevity and performance.</p>
+      <div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>SaaS Platforms:</strong> Multi-tenant architectures built for growth.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Custom APIs:</strong> RESTful & GraphQL APIs, secure and documented.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Performance:</strong> Core Web Vitals, lightning-fast load times, SEO.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Stack:</strong> React, Next.js, Node.js, TypeScript, Python.</span></div>
+      </div>
+      <div style="margin-top:1.75rem;">
+        <a href="contact.html" class="btn-pill-dark" style="width:fit-content;">Start a web project <span class="arr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1C1C22" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+      </div>
+    </div>
+    <div class="order-1 md:order-2" style="border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.1);">
+      <img alt="Web Engineering" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0O7FGc6hZV8Af0yCwC2oViBvWjKAX9vcX9PmvITazGTN3mFFO_7Zp3efU9b2uj6bpxuTxP3pKP-x9ZwYE6rsrsj3OrYLd5Qg9a0v5oSOWecIn1pgmv-SunzegrUSxSrr9Zj-p0czEZdeqlPEhgkBXdK4ri9rNXUBBP6ATDI33WmpdBhCQuM6nGDiTTdyYFGHVaysd3SkYQ-cau2hzFoJUcCaoAKYa7gHwNpGFkENnmbV_r9V5kQmfsGm1Ipt6Ui3rlrkC9MVeDSQ"/>
+    </div>
+  </section>
+
+  <!-- MOBILE -->
+  <section id="mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:7rem;" class="block md:grid">
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.1);">
+      <img alt="Mobile Development" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChIM1i6cQRFw5DsT2pn38YoicMfANhH_3sVnC5Q1So5eBMpqKjyFgqrCyVYtCMO9uNyWgtjWeJLWgFyA9n77-gQDsD5T3QL6D47BMwSGu6jwBt5d9NSM0TlYVCLPSLelZXgdCBnXhz7oxCIAemEJ1PtU3EFQMBhPfkQ9J4i05ne9d8FI-_DQwOIr5TLgGJifxE_zHNqr704lUnzcAO2ydAIV_7YiTkYGozp8HMH1Rs_fipcBFucGUUy6g6N37O3BLxUuASC0MoVxQ"/>
+    </div>
+    <div>
+      <div style="display:inline-block;background:#FDF2F8;color:#9D174D;padding:0.25rem 0.875rem;border-radius:9999px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;">Mobility</div>
+      <h2 style="font-size:clamp(1.875rem,3.5vw,3rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;">Mobile App Development</h2>
+      <p style="font-size:1rem;color:#6B7280;line-height:1.7;margin-bottom:1.75rem;">Native-quality experiences that users love. We develop iOS & Android apps that deliver seamlessly on every device.</p>
+      <div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>iOS & Android:</strong> High-performance native applications.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Flutter & React Native:</strong> Cross-platform from a single codebase.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Mobile UI/UX:</strong> Gesture-first design for mobile-native users.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>App Store:</strong> Full support for submissions and compliance.</span></div>
+      </div>
+      <div style="margin-top:1.75rem;">
+        <a href="contact.html" class="btn-pill-dark" style="width:fit-content;">Build your mobile app <span class="arr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1C1C22" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section id="ai" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:7rem;" class="block md:grid">
+    <div class="order-2 md:order-1">
+      <div style="display:inline-block;background:#EFF6FF;color:#1D4ED8;padding:0.25rem 0.875rem;border-radius:9999px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;">Intelligence</div>
+      <h2 style="font-size:clamp(1.875rem,3.5vw,3rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;">AI & Automation</h2>
+      <p style="font-size:1rem;color:#6B7280;line-height:1.7;margin-bottom:1.75rem;">Intelligent systems that predict trends, automate operations, and deliver insights — so your team can focus on what matters most.</p>
+      <div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>LLM Integration:</strong> GPT, Claude, and custom models in your product.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>AI Agents:</strong> Autonomous agents for support, sales, and internal tools.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Predictive Analytics:</strong> Forecasting models for business decisions.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Workflow Automation:</strong> Pipelines that eliminate repetitive tasks.</span></div>
+      </div>
+      <div style="margin-top:1.75rem;">
+        <a href="contact.html" class="btn-pill-dark" style="width:fit-content;">Explore AI solutions <span class="arr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1C1C22" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+      </div>
+    </div>
+    <div class="order-1 md:order-2" style="border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.1);">
+      <img alt="AI & Machine Learning" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNpnAWgzvdYj_IBnBSCkJKeFak3_iaXfcN6PXc-O44TZamqWf1IXgZfk9QsvDYuOtdJXLxjcTf6yqxXady5RfpUfij9Usz37mrkvgmaK-XoKhuX-Y-4CqT0GJFzrYjzoXqwalwU_56PAehyTErh9ilN6Azc4LaZdyegyy1EVuqiobDa_MQ4nYIWZsC1aZ8K8I_7B9vJBPP_cTqMIok1eEPziVvrL8NvRmZjE4nDW_aY-B26-HXh0KODc-inaO-xbFRiP7lFas-YO8"/>
+    </div>
+  </section>
+
+  <!-- DEVOPS -->
+  <section id="devops" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;" class="block md:grid">
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.1);">
+      <img alt="DevOps and Cloud" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI6iFHBP4rbOLKduxMhqmCUzF_ulKgxTczZqknXINeFNbGPuxdJDimuz7Ykv-aVBN78wLTlIh3Zy4pNrh_yehfBF-nAUcS34tIdOZVMcnuemRu2wzW55RA3uvhsxoHqu5BH0YUYPUXw9cXpTJr8HY7c2LKK7CmCBRhd9nxLhVBhU3EdLGyQtUSOlXSdgVezVUNF5uMVUByx27DlmmrzdGe5it4V7O2qaWE8bVOTlEuV3a7bjdAr2m-S5jk3mnk8EIEzxBGMkIFPEU"/>
+    </div>
+    <div>
+      <div style="display:inline-block;background:#F0FDF4;color:#0D5C3A;padding:0.25rem 0.875rem;border-radius:9999px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;">Efficiency</div>
+      <h2 style="font-size:clamp(1.875rem,3.5vw,3rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;">DevOps & Cloud Engineering</h2>
+      <p style="font-size:1rem;color:#6B7280;line-height:1.7;margin-bottom:1.75rem;">Automation, scalability, and security baked into every layer of your infrastructure — so it evolves as fast as your business does.</p>
+      <div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Cloud Infrastructure:</strong> Architecture on AWS, Azure, and GCP.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>Kubernetes (K8s):</strong> Container orchestration at scale.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>CI/CD Pipelines:</strong> Fully automated testing and deployments.</span></div>
+        <div class="check-item"><span class="check-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><span style="font-size:0.9375rem;color:#374151;"><strong>DevSecOps:</strong> Security integrated at every stage of the pipeline.</span></div>
+      </div>
+      <div style="margin-top:1.75rem;">
+        <a href="contact.html" class="btn-pill-dark" style="width:fit-content;">Optimise your infra <span class="arr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1C1C22" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- CTA DARK -->
+<section style="background:#1C1C22;padding:7rem 0;">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <h2 style="font-size:clamp(2rem,4.5vw,3.75rem);font-weight:400;line-height:1.05;letter-spacing:-0.025em;color:#fff;margin-bottom:1.25rem;">Ready to transform<br/><em style="color:#B3EBF2;">your business?</em></h2>
+    <p style="font-size:1.125rem;color:rgba(255,255,255,0.5);margin-bottom:2.5rem;max-width:28rem;margin-left:auto;margin-right:auto;line-height:1.65;">Our consultants are ready to discuss your project and find the best path forward.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <a href="booking.html" class="btn-pill-dark" style="background:#B3EBF2;color:#1C1C22;">Book a Free Discovery Call <span class="arr" style="background:#1C1C22;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+      <a href="contact.html" style="display:inline-flex;align-items:center;gap:0.75rem;padding:0.875rem 1.75rem;border:1.5px solid rgba(255,255,255,0.2);color:#fff;border-radius:9999px;font-size:0.9375rem;font-weight:500;text-decoration:none;transition:border-color 0.2s;" class="hover:border-white">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#F9F9F7;border-top:1px solid rgba(0,0,0,0.06);padding:4rem 0 3rem;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3.5rem;" class="grid-cols-1 md:grid-cols-4-custom">
+      <div>
+        <a href="index.html" style="display:flex;align-items:center;gap:0.625rem;text-decoration:none;margin-bottom:1rem;">
+          <div style="width:2rem;height:2rem;background:#0D5C3A;border-radius:10px;display:flex;align-items:center;justify-content:center;"><span style="color:#B3EBF2;font-weight:800;font-size:1rem;">N</span></div>
+          <span style="font-size:1.375rem;font-weight:800;letter-spacing:-0.04em;color:#1C1C22;">Nexora</span>
+        </a>
+        <p style="font-size:0.9375rem;color:#6B7280;line-height:1.65;max-width:18rem;">Engineering the future, one product at a time.</p>
+      </div>
+      <div>
+        <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:1rem;">Services</p>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.9375rem;color:#6B7280;">
+          <a href="#web"    style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">Web Engineering</a>
+          <a href="#mobile" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">Mobile Apps</a>
+          <a href="#ai"     style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">AI & Automation</a>
+          <a href="#devops" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">DevOps & Cloud</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:1rem;">Company</p>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.9375rem;color:#6B7280;">
+          <a href="about.html"   style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">About Us</a>
+          <a href="booking.html" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">Book a Call</a>
+          <a href="contact.html" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">Contact</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9CA3AF;margin-bottom:1rem;">Follow us</p>
+        <div style="display:flex;gap:1.25rem;font-size:0.9375rem;color:#6B7280;">
+          <a href="#" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">LinkedIn</a>
+          <a href="#" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">Twitter</a>
+          <a href="#" style="color:inherit;text-decoration:none;" class="hover:text-ink transition-colors">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(0,0,0,0.06);padding-top:1.5rem;text-align:center;">
+      <p style="font-size:0.8125rem;color:#9CA3AF;">© 2024 Nexora Technologies. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- POPUP -->
+<div id="popup" style="position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.4s ease;">
+  <div style="position:absolute;inset:0;background:rgba(28,28,34,0.5);backdrop-filter:blur(4px);" onclick="closePopup()"></div>
+  <div id="popup-card" style="position:relative;background:#fff;border-radius:20px;max-width:420px;width:100%;padding:2rem;border-top:3px solid #B3EBF2;box-shadow:0 25px 60px rgba(0,0,0,0.2);transform:translateY(16px);transition:transform 0.4s ease;">
+    <button onclick="closePopup()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:#9CA3AF;padding:0.25rem;" class="hover:text-ink transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    <div style="width:2.75rem;height:2.75rem;background:#F0FDF4;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D5C3A" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+    <h3 style="font-size:1.375rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:0.5rem;">Interested in a service?</h3>
+    <p style="font-size:0.9375rem;color:#6B7280;line-height:1.65;margin-bottom:1.5rem;">Book a free 30-min strategy call and get a custom roadmap — no commitment needed.</p>
+    <div style="display:flex;gap:0.75rem;">
+      <a href="booking.html" class="btn-pill-dark" style="flex:1;justify-content:center;">Book Free Call <span class="arr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
+      <a href="contact.html" style="flex:1;display:inline-flex;align-items:center;justify-content:center;padding:0.875rem 1.25rem;border:1.5px solid rgba(28,28,34,0.15);border-radius:9999px;font-size:0.9375rem;font-weight:500;color:#1C1C22;text-decoration:none;" class="hover:border-ink transition-colors">Get a Quote</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('mb').addEventListener('click',function(){document.getElementById('mm').classList.toggle('hidden');});
+  if (!sessionStorage.getItem('nexoraPopupShown')) {
+    setTimeout(function(){const p=document.getElementById('popup');const c=document.getElementById('popup-card');p.style.opacity='1';p.style.pointerEvents='auto';c.style.transform='translateY(0)';sessionStorage.setItem('nexoraPopupShown','true');},2500);
+  }
+  function closePopup(){const p=document.getElementById('popup');const c=document.getElementById('popup-card');p.style.opacity='0';c.style.transform='translateY(16px)';setTimeout(function(){p.style.pointerEvents='none';},400);}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closePopup();});
+</script>
+</body>
+</html>

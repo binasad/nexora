@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact | Nexora</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F9F9F7; color: #1C1C22; margin: 0; }
+
+  .nav-wrap { position: sticky; top: 0; z-index: 50; transition: background 0.3s, box-shadow 0.3s; }
+  .nav-wrap.scrolled { background: rgba(249,249,247,0.92); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.07); }
+
+  .btn-pill-dark { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:#1C1C22; color:#fff; border-radius:9999px; font-size:0.9375rem; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.15s; cursor:pointer; border:none; font-family:'Manrope',sans-serif; }
+  .btn-pill-dark:hover { background:#0D5C3A; transform:translateY(-1px); }
+  .btn-pill-nav { display:inline-flex; align-items:center; gap:0.6rem; padding:0.6rem 1.2rem; background:#DDD6FE; color:#1C1C22; border-radius:9999px; font-size:0.875rem; font-weight:600; text-decoration:none; transition:opacity 0.2s; }
+  .btn-pill-nav:hover { opacity:0.85; }
+  .btn-pill-cyan { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:#B3EBF2; color:#1C1C22; border-radius:9999px; font-size:0.9375rem; font-weight:600; text-decoration:none; transition:opacity 0.2s,transform 0.15s; }
+  .btn-pill-cyan:hover { opacity:0.85; transform:translateY(-1px); }
+
+  .arr { width:2rem; height:2rem; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .arr-dark { width:2rem; height:2rem; background:#1C1C22; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  .form-field { width:100%; padding:0.875rem 1rem; background:#fff; border:1.5px solid #e5e7eb; border-radius:0.75rem; font-family:'Manrope',sans-serif; font-size:0.9375rem; color:#1C1C22; transition:border-color 0.2s,box-shadow 0.2s; outline:none; }
+  .form-field:focus { border-color:#0D5C3A; box-shadow:0 0 0 3px rgba(13,92,58,0.1); }
+  .form-field::placeholder { color:#9ca3af; }
+  textarea.form-field { resize:vertical; min-height:140px; }
+  select.form-field { cursor:pointer; -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+
+  .contact-card { background:#fff; border-radius:1.25rem; padding:1.75rem; border:1px solid rgba(0,0,0,0.06); }
+  .info-item { display:flex; align-items:flex-start; gap:1rem; }
+  .info-icon { width:2.5rem; height:2.5rem; border-radius:0.625rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  #engagePopup { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(120px); z-index:100; width:min(90vw,480px); background:#fff; border-radius:1.25rem; box-shadow:0 24px 64px rgba(0,0,0,0.14); border-top:3px solid #B3EBF2; padding:1.75rem; transition:transform 0.45s cubic-bezier(0.34,1.56,0.64,1); }
+  #engagePopup.show { transform:translateX(-50%) translateY(0); }
+
+  #mobileMenu { display:none; }
+  #mobileMenu.open { display:block; }
+  #successMsg { display:none; }
+  #successMsg.show { display:flex; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar" class="nav-wrap" style="background:rgba(249,249,247,0.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,0.07);">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="text-xl font-bold tracking-tight" style="color:#0D5C3A;letter-spacing:-0.03em;">Nexora</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+      <a href="services.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Services</a>
+      <a href="about.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">About</a>
+      <a href="contact.html" class="text-sm font-medium transition-colors" style="color:#0D5C3A;font-weight:600;">Contact</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="booking.html" class="btn-pill-nav">
+        Book a call
+        <span class="arr-dark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+    <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="#1C1C22" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="md:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-3">
+    <a href="index.html" class="block text-sm font-medium text-gray-700 py-1">Home</a>
+    <a href="services.html" class="block text-sm font-medium text-gray-700 py-1">Services</a>
+    <a href="about.html" class="block text-sm font-medium text-gray-700 py-1">About</a>
+    <a href="contact.html" class="block text-sm font-medium py-1" style="color:#0D5C3A;">Contact</a>
+    <a href="booking.html" class="btn-pill-dark w-fit mt-2">Book a call <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="py-20 md:py-28" style="background:#F9F9F7;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-2xl">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-5" style="color:#0D5C3A;">Get in Touch</span>
+      <h1 class="font-normal leading-tight mb-5" style="font-size:clamp(2.5rem,6vw,4rem);letter-spacing:-0.03em;color:#1C1C22;">
+        Let's talk about<br><em style="color:#0D5C3A;font-style:italic;">your project</em>
+      </h1>
+      <p class="text-lg leading-relaxed text-gray-600">
+        Whether you have a clear brief or just an idea, we'd love to hear from you. We typically respond within one business day.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT LAYOUT -->
+<section class="pb-24" style="background:#F9F9F7;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-3 gap-8 items-start">
+
+      <!-- FORM (2/3) -->
+      <div class="lg:col-span-2">
+        <div style="background:#fff;border-radius:1.5rem;padding:2.5rem;border:1px solid rgba(0,0,0,0.06);">
+          <h2 class="font-semibold text-xl mb-6" style="color:#1C1C22;letter-spacing:-0.02em;">Send us a message</h2>
+
+          <div id="successMsg" class="flex-col items-center justify-center py-12 text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style="background:#B3EBF2;">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 14l6 6 12-12" stroke="#0D5C3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="font-semibold text-xl mb-2" style="color:#1C1C22;">Message sent!</h3>
+            <p class="text-gray-500 text-sm">We'll get back to you within one business day.</p>
+          </div>
+
+          <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">First name <span style="color:#ef4444;">*</span></label>
+                <input type="text" class="form-field" placeholder="Marcus" required/>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">Last name <span style="color:#ef4444;">*</span></label>
+                <input type="text" class="form-field" placeholder="Chen" required/>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">Work email <span style="color:#ef4444;">*</span></label>
+              <input type="email" class="form-field" placeholder="marcus@company.com" required/>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">Company name</label>
+              <input type="text" class="form-field" placeholder="Acme Corp"/>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">What are you interested in? <span style="color:#ef4444;">*</span></label>
+              <select class="form-field" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option>Cloud Infrastructure &amp; DevOps</option>
+                <option>AI &amp; Machine Learning</option>
+                <option>Web Application Development</option>
+                <option>Mobile App Development</option>
+                <option>Technical Audit / Consulting</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">Estimated budget</label>
+              <select class="form-field">
+                <option value="" disabled selected>Select a range…</option>
+                <option>Under $10,000</option>
+                <option>$10,000 – $50,000</option>
+                <option>$50,000 – $150,000</option>
+                <option>$150,000+</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2" style="color:#1C1C22;">Tell us about your project <span style="color:#ef4444;">*</span></label>
+              <textarea class="form-field" placeholder="Describe what you're building, the challenges you're facing, or what outcome you're hoping for…" required></textarea>
+            </div>
+            <div class="pt-2">
+              <button type="submit" class="btn-pill-dark w-full justify-center" style="font-size:1rem;">
+                Send message
+                <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (1/3) -->
+      <div class="space-y-5">
+        <div class="contact-card">
+          <h3 class="font-semibold text-base mb-5" style="color:#1C1C22;">Contact information</h3>
+          <div class="space-y-4">
+            <div class="info-item">
+              <div class="info-icon" style="background:#B3EBF2;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15.75 12.69a1.5 1.5 0 01-.33 1.01l-.98 1.22a2.25 2.25 0 01-2.33.76C5.77 14.1 3.9 8.23 3.31 5.9a2.25 2.25 0 01.76-2.33l1.22-.98a1.5 1.5 0 012.03.22l1.34 1.79a1.5 1.5 0 01-.13 1.99l-.56.56a8.98 8.98 0 004.88 4.88l.56-.56a1.5 1.5 0 011.99-.13l1.79 1.34c.3.22.47.57.46.93z" stroke="#0D5C3A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-0.5">Phone</div>
+                <div class="text-sm font-medium" style="color:#1C1C22;">+1 (415) 555-0192</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon" style="background:#F9A8D4;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.25 4.5h13.5a.75.75 0 01.75.75v8.25a.75.75 0 01-.75.75H2.25a.75.75 0 01-.75-.75V5.25a.75.75 0 01.75-.75zM2.25 4.5L9 10.5l6.75-6" stroke="#1C1C22" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-0.5">Email</div>
+                <div class="text-sm font-medium" style="color:#1C1C22;">hello@nexora.dev</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon" style="background:#93C5FD;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5a6 6 0 016 6c0 4.5-6 9-6 9S3 12 3 7.5a6 6 0 016-6zM9 9.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" stroke="#1C1C22" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-0.5">Office</div>
+                <div class="text-sm font-medium" style="color:#1C1C22;">44 Montgomery St<br>San Francisco, CA 94104</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon" style="background:#B3EBF2;">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#0D5C3A" stroke-width="1.4"/><path d="M9 5.25V9l2.25 2.25" stroke="#0D5C3A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-0.5">Response time</div>
+                <div class="text-sm font-medium" style="color:#1C1C22;">Within 1 business day</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card" style="background:#1C1C22;border-color:transparent;">
+          <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#B3EBF2;">Prefer to talk?</div>
+          <h3 class="font-semibold text-base mb-2" style="color:#fff;">Book a 30-min discovery call</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color:rgba(255,255,255,0.6);">Jump on a call with one of our senior engineers. No pitch — just a real conversation about your project.</p>
+          <a href="booking.html" class="btn-pill-cyan" style="font-size:0.875rem;width:100%;justify-content:center;">
+            Book a call
+            <span class="arr-dark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <h3 class="font-semibold text-base mb-4" style="color:#1C1C22;">Common questions</h3>
+          <div class="space-y-3">
+            <details class="group">
+              <summary class="text-sm font-semibold cursor-pointer list-none flex justify-between items-center gap-2" style="color:#1C1C22;">
+                How fast can you start?
+                <svg class="flex-shrink-0 transition-transform group-open:rotate-180" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <p class="text-xs leading-relaxed text-gray-500 mt-2">Most projects kick off within 2 weeks of contract signing. For urgent projects we can often start sooner.</p>
+            </details>
+            <div style="height:1px;background:#f3f4f6;"></div>
+            <details class="group">
+              <summary class="text-sm font-semibold cursor-pointer list-none flex justify-between items-center gap-2" style="color:#1C1C22;">
+                Do you work with early-stage startups?
+                <svg class="flex-shrink-0 transition-transform group-open:rotate-180" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <p class="text-xs leading-relaxed text-gray-500 mt-2">Absolutely. Some of our best projects started as two-person teams. We offer flexible scoping for pre-series A companies.</p>
+            </details>
+            <div style="height:1px;background:#f3f4f6;"></div>
+            <details class="group">
+              <summary class="text-sm font-semibold cursor-pointer list-none flex justify-between items-center gap-2" style="color:#1C1C22;">
+                What time zones do you cover?
+                <svg class="flex-shrink-0 transition-transform group-open:rotate-180" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <p class="text-xs leading-relaxed text-gray-500 mt-2">We have team members across US, UK, and APAC. Core overlap hours are 9am–1pm Pacific for live collaboration.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP PLACEHOLDER -->
+<section style="background:#e5e7eb;height:280px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#d1e8d5 0%,#c8dfe4 50%,#d8d0e8 100%);display:flex;align-items:center;justify-content:center;">
+    <div class="text-center">
+      <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style="background:#0D5C3A;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2a8 8 0 018 8c0 6-8 12-8 12S4 16 4 10a8 8 0 018-8zm0 5a3 3 0 100 6 3 3 0 000-6z" fill="#fff"/></svg>
+      </div>
+      <div class="font-semibold text-sm" style="color:#1C1C22;">44 Montgomery St, San Francisco, CA 94104</div>
+      <div class="text-xs text-gray-500 mt-1">Embarcadero Center · BART accessible</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#111117;color:rgba(255,255,255,0.55);">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
+      <div class="col-span-2">
+        <div class="text-3xl font-bold mb-3" style="color:#0D5C3A;letter-spacing:-0.04em;">Nexora</div>
+        <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(255,255,255,0.45);">Building the software infrastructure that powers ambitious companies.</p>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Services</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="services.html" class="hover:text-white transition-colors">Cloud &amp; DevOps</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">AI &amp; Machine Learning</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">Web Development</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">Mobile Apps</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Company</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="booking.html" class="hover:text-white transition-colors">Book a Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Contact</div>
+        <ul class="space-y-2 text-sm">
+          <li>hello@nexora.dev</li>
+          <li>+1 (415) 555-0192</li>
+          <li>San Francisco, CA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t pt-8 flex flex-col md:flex-row justify-between gap-4 text-xs" style="border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);">
+      <span>© 2024 Nexora Technologies, Inc. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ENGAGEMENT POPUP -->
+<div id="engagePopup">
+  <button onclick="document.getElementById('engagePopup').classList.remove('show');sessionStorage.setItem('popupSeen','1');" style="position:absolute;top:1rem;right:1rem;width:1.75rem;height:1.75rem;border-radius:50%;background:#f3f4f6;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#0D5C3A;">Free Consultation</div>
+  <h3 class="font-semibold text-lg mb-2" style="color:#1C1C22;letter-spacing:-0.02em;">Get a project estimate in 24 hours</h3>
+  <p class="text-sm leading-relaxed text-gray-500 mb-4">Tell us what you're building and we'll scope it, price it, and tell you exactly how we'd approach it — no commitment required.</p>
+  <a href="booking.html" onclick="sessionStorage.setItem('popupSeen','1');" class="btn-pill-dark" style="width:100%;justify-content:center;">
+    Book free call
+    <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+  if (!sessionStorage.getItem('popupSeen')) {
+    setTimeout(() => document.getElementById('engagePopup').classList.add('show'), 2500);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    sessionStorage.setItem('popupSeen', '1');
+    document.getElementById('engagePopup').classList.remove('show');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agency Admin Dashboard</title>
+<!-- BEGIN: Script Imports -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#B3EBF2',
+            sidebar: '#F8F9FA',
+            dashboardBg: '#FFFFFF',
+            primary: '#B3EBF2',
+            'primary-dark': '#92D7E0'
+          },
+          borderRadius: {
+            'none': '0',
+            'sm': '0.125rem',
+            DEFAULT: '8px',
+            'md': '8px',
+            'lg': '8px',
+            'xl': '8px',
+            '2xl': '8px',
+            '3xl': '8px',
+            'full': '9999px',
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Script Imports -->
+<!-- BEGIN: Styles -->
+<style data-purpose="layout-styles">
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f3f4f6;
+    }
+    .sidebar-transition {
+      transition: all 0.3s ease-in-out;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #B3EBF2;
+      border-radius: 10px;
+    }
+  </style>
+<!-- END: Styles -->
+</head>
+<body class="h-screen overflow-hidden flex">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-sidebar border-r border-gray-200 flex flex-col sidebar-transition" data-purpose="main-sidebar">
+<div class="p-6 border-b border-gray-200">
+<h1 class="text-xl font-bold tracking-tight text-gray-800">AGENCY <span class="text-gray-400">OS</span></h1>
+</div>
+<nav class="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar">
+<!-- Dashboard Overview Link -->
+<a class="flex items-center space-x-3 p-3 rounded-lg bg-primary text-gray-900 font-medium transition-colors" data-purpose="nav-item" href="#">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Leads</span>
+</a>
+<!-- Case Studies Link -->
+<a class="flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors" data-purpose="nav-item" href="#">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Case Studies</span>
+</a>
+<!-- Services Link -->
+<a class="flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors" data-purpose="nav-item" href="#">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Services</span>
+</a>
+</nav>
+<!-- User Profile Footer -->
+<div class="p-4 border-t border-gray-200 flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs font-bold text-gray-700">AD</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-semibold text-gray-800 truncate">Admin User</p>
+<p class="text-xs text-gray-500 truncate">admin@agency.com</p>
+</div>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-white" data-purpose="main-dashboard-view">
+<!-- BEGIN: Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-gray-200 shrink-0">
+<div class="flex items-center">
+<h2 class="text-lg font-semibold text-gray-800">Leads Management</h2>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<input class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="Search leads..." type="text"/>
+<svg class="h-4 w-4 absolute left-3 top-3 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm" data-purpose="add-lead-btn" onclick="document.getElementById('addLeadModal').classList.remove('hidden')">
+          + Add New Lead
+        </button>
+</div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Table Section -->
+<section class="flex-1 p-8 overflow-y-auto custom-scrollbar" data-purpose="content-section">
+<div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse" id="leads-table">
+<thead>
+<tr class="bg-gray-50 border-b border-gray-200">
+<th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Name</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Email</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Project</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Budget</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
+<th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-xs font-bold text-gray-700">JD</div>
+<span class="text-sm font-medium text-gray-900">John Doe</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-gray-600">john@example.com</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/30 text-gray-800 text-xs font-medium rounded-full">E-commerce App</span>
+</td>
+<td class="px-6 py-4 text-sm font-semibold text-gray-900">$12,000</td>
+<td class="px-6 py-4 text-sm text-gray-500">Oct 24, 2023</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary-dark transition-colors p-1" title="Edit">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-xs font-bold text-gray-700">SS</div>
+<span class="text-sm font-medium text-gray-900">Sarah Smith</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-gray-600">sarah.s@techcorp.io</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/30 text-gray-800 text-xs font-medium rounded-full">Branding Identity</span>
+</td>
+<td class="px-6 py-4 text-sm font-semibold text-gray-900">$5,500</td>
+<td class="px-6 py-4 text-sm text-gray-500">Oct 22, 2023</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary-dark transition-colors p-1" title="Edit">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-xs font-bold text-gray-700">ML</div>
+<span class="text-sm font-medium text-gray-900">Mike Litoris</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-gray-600">mike@litoris.design</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/30 text-gray-800 text-xs font-medium rounded-full">SaaS Dashboard</span>
+</td>
+<td class="px-6 py-4 text-sm font-semibold text-gray-900">$25,000</td>
+<td class="px-6 py-4 text-sm text-gray-500">Oct 21, 2023</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary-dark transition-colors p-1" title="Edit">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Placeholder -->
+<div class="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50">
+<span class="text-xs text-gray-500">Showing 3 of 42 leads</span>
+<div class="flex space-x-2">
+<button class="px-3 py-1 border border-gray-200 rounded text-xs hover:bg-primary transition-colors">Previous</button>
+<button class="px-3 py-1 border border-gray-200 rounded text-xs hover:bg-primary transition-colors">Next</button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Table Section -->
+</main>
+<!-- END: Main Content Area -->
+<!-- BEGIN: CRUD Modal (Add Lead) -->
+<div class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" data-purpose="modal-container" id="addLeadModal">
+<div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+<h3 class="text-lg font-bold text-gray-900">Add New Project Lead</h3>
+<button class="text-gray-400 hover:text-gray-600" onclick="document.getElementById('addLeadModal').classList.add('hidden')">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<form class="p-6 space-y-4" data-purpose="add-lead-form">
+<div class="grid grid-cols-2 gap-4">
+<div class="col-span-2">
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Full Name</label>
+<input class="w-full border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="e.g. Jane Doe" type="text"/>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email Address</label>
+<input class="w-full border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="jane@example.com" type="email"/>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Project Name</label>
+<input class="w-full border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="e.g. Web Redesign" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Budget ($)</label>
+<input class="w-full border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="5000" type="number"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Status</label>
+<select class="w-full border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary">
+<option>New Lead</option>
+<option>Proposal Sent</option>
+<option>In Review</option>
+</select>
+</div>
+</div>
+<div class="pt-4 flex space-x-3">
+<button class="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors" onclick="document.getElementById('addLeadModal').classList.add('hidden')" type="button">
+            Cancel
+          </button>
+<button class="flex-1 px-4 py-2 bg-primary hover:bg-primary-dark text-gray-900 rounded-lg text-sm font-semibold transition-colors" type="submit">
+            Save Lead
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- END: CRUD Modal -->
+<!-- BEGIN: Interactive Elements Script -->
+<script data-purpose="event-handlers">
+    // Simple toggle for the modal
+    const closeOnEsc = (e) => {
+      if (e.key === "Escape") {
+        document.getElementById('addLeadModal').classList.add('hidden');
+      }
+    };
+    window.addEventListener('keydown', closeOnEsc);
+
+    // Prevent form submission for demo
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Mock Lead Saved Successfully!');
+      document.getElementById('addLeadModal').classList.add('hidden');
+    });
+  </script>
+<!-- END: Interactive Elements Script -->
+</body></html>

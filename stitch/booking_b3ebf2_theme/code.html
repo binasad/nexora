@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book a Consultation | Strategy Session</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- BEGIN: Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#B3EBF2',
+              gray: '#D1D0D0',
+            }
+          },
+          borderRadius: {
+            'theme': '8px', // Based on ROUND_EIGHT
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Tailwind Configuration -->
+<!-- BEGIN: Custom Typography Styles -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc; /* Professional light background */
+    }
+    .headline-tight {
+      letter-spacing: -0.02em;
+    }
+  </style>
+<!-- END: Custom Typography Styles -->
+<!-- BEGIN: Layout Styles -->
+<style data-purpose="layout-refinements">
+    .calendar-container {
+      min-height: 600px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+    .accent-glow {
+      box-shadow: 0 0 20px rgba(179, 235, 242, 0.4);
+    }
+  </style>
+<!-- END: Layout Styles -->
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+<!-- BEGIN: Main Content Container -->
+<main class="w-full max-w-4xl mx-auto" data-purpose="consultation-booking-section">
+<!-- BEGIN: Header Section -->
+<header class="text-center mb-12">
+<div class="inline-block w-16 h-1 bg-brand-primary mb-6 rounded-full"></div>
+<h1 class="text-4xl md:text-5xl font-bold text-slate-900 headline-tight mb-4">
+        Schedule Your Strategy Session
+      </h1>
+<p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        Select a time that works best for you. Our 30-minute introductory call will help us understand your goals and outline a roadmap for success.
+      </p>
+</header>
+<!-- END: Header Section -->
+<!-- BEGIN: Calendar Integration Placeholder -->
+<section class="bg-white rounded-theme overflow-hidden calendar-container border border-slate-100" data-purpose="calendly-widget-wrapper">
+<!-- 
+        This is a placeholder for an integrated calendar widget like Calendly.
+        In a production environment, you would replace this div with the 
+        provided embed code from your scheduling provider.
+      -->
+<div class="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-50/50">
+<div class="mb-6 p-4 bg-brand-primary/20 rounded-full">
+<svg class="h-12 w-12 text-slate-700" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h2 class="text-xl font-semibold text-slate-800 mb-2">Calendar Widget Placeholder</h2>
+<p class="text-slate-500 text-center max-w-sm mb-8">
+          Your Calendly or scheduling tool widget will appear here, allowing clients to book directly.
+        </p>
+<!-- Simulation of a primary action button style -->
+<button class="px-8 py-3 bg-brand-primary text-slate-900 font-semibold rounded-theme shadow-sm hover:brightness-95 transition-all cursor-not-allowed" disabled="">
+          Widget Loading...
+        </button>
+</div>
+</section>
+<!-- END: Calendar Integration Placeholder -->
+<!-- BEGIN: Footer Branding/Navigation -->
+<footer class="mt-12 text-center text-sm text-slate-500">
+<nav class="flex justify-center space-x-8 mb-6">
+<a class="hover:text-slate-900 transition-colors font-medium border-b-2 border-transparent hover:border-brand-primary pb-1" href="#">Home</a>
+<a class="hover:text-slate-900 transition-colors font-medium border-b-2 border-transparent hover:border-brand-primary pb-1" href="#">Services</a>
+<a class="hover:text-slate-900 transition-colors font-medium border-b-2 border-transparent hover:border-brand-primary pb-1" href="#">Contact</a>
+</nav>
+<p class="text-slate-400">© 2023 Strategy Firm. All rights reserved.</p>
+</footer>
+<!-- END: Footer Branding/Navigation -->
+</main>
+<!-- END: Main Content Container -->
+<!-- BEGIN: Interactivity Script -->
+<script data-purpose="widget-init-logic">
+    // This script would typically initialize third-party widgets
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Consultation page loaded. Theme THEME_14 applied.');
+    });
+  </script>
+<!-- END: Interactivity Script -->
+</body></html>

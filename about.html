@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Nexora</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+        colors: {
+          canvas: '#F9F9F7',
+          ink: '#1C1C22',
+          forest: '#0D5C3A',
+          cyan: '#B3EBF2',
+          lavender: '#DDD6FE',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F9F9F7; color: #1C1C22; margin: 0; }
+
+  /* NAV */
+  .nav-wrap { position: sticky; top: 0; z-index: 50; transition: background 0.3s, box-shadow 0.3s; }
+  .nav-wrap.scrolled { background: rgba(249,249,247,0.92); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.07); }
+
+  /* BUTTONS */
+  .btn-pill-dark { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:#1C1C22; color:#fff; border-radius:9999px; font-size:0.9375rem; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.15s; }
+  .btn-pill-dark:hover { background:#0D5C3A; transform:translateY(-1px); }
+  .btn-pill-ghost { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:transparent; color:#1C1C22; border:1.5px solid #1C1C22; border-radius:9999px; font-size:0.9375rem; font-weight:500; text-decoration:none; transition:all 0.2s; }
+  .btn-pill-ghost:hover { background:#1C1C22; color:#fff; transform:translateY(-1px); }
+  .btn-pill-nav { display:inline-flex; align-items:center; gap:0.6rem; padding:0.6rem 1.2rem; background:#DDD6FE; color:#1C1C22; border-radius:9999px; font-size:0.875rem; font-weight:600; text-decoration:none; transition:opacity 0.2s; }
+  .btn-pill-nav:hover { opacity:0.85; }
+  .btn-pill-cyan { display:inline-flex; align-items:center; gap:0.75rem; padding:0.875rem 1.75rem; background:#B3EBF2; color:#1C1C22; border-radius:9999px; font-size:0.9375rem; font-weight:600; text-decoration:none; transition:opacity 0.2s,transform 0.15s; }
+  .btn-pill-cyan:hover { opacity:0.85; transform:translateY(-1px); }
+
+  /* ARROW CIRCLE */
+  .arr { width:2rem; height:2rem; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .arr-dark { width:2rem; height:2rem; background:#1C1C22; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .arr-forest { width:2rem; height:2rem; background:#0D5C3A; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  /* HERO SCENE */
+  .hero-scene {
+    background:
+      radial-gradient(ellipse 70% 80% at 10% 55%, rgba(13,78,42,0.95) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 65% at 78% 12%, rgba(28,68,110,0.88) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 55% at 60% 92%, rgba(110,72,15,0.82) 0%, transparent 55%),
+      radial-gradient(ellipse 38% 45% at 98% 68%, rgba(10,38,24,0.78) 0%, transparent 50%),
+      #060e08;
+    min-height: 52vh;
+  }
+
+  /* VALUE CARD */
+  .value-card { background:#fff; border-radius:1rem; padding:2rem; border:1px solid rgba(0,0,0,0.06); transition:box-shadow 0.2s,transform 0.2s; }
+  .value-card:hover { box-shadow:0 8px 32px rgba(0,0,0,0.08); transform:translateY(-2px); }
+
+  /* TEAM CARD */
+  .team-card { background:#fff; border-radius:1rem; overflow:hidden; border:1px solid rgba(0,0,0,0.06); transition:box-shadow 0.2s,transform 0.2s; }
+  .team-card:hover { box-shadow:0 8px 32px rgba(0,0,0,0.08); transform:translateY(-3px); }
+  .team-avatar { width:100%; aspect-ratio:1; object-fit:cover; background:#e5e7eb; }
+
+  /* STAT CARD BORDERS */
+  .stat-card-green { border-left: 4px solid #0D5C3A; }
+  .stat-card-pink   { border-left: 4px solid #F9A8D4; }
+  .stat-card-blue   { border-left: 4px solid #93C5FD; }
+  .stat-card-cyan   { border-left: 4px solid #B3EBF2; }
+
+  /* TIMELINE */
+  .timeline-item { position:relative; padding-left:2.5rem; }
+  .timeline-item::before { content:''; position:absolute; left:0.625rem; top:0.5rem; width:2px; bottom:-1.5rem; background:#e5e7eb; }
+  .timeline-item:last-child::before { display:none; }
+  .timeline-dot { position:absolute; left:0; top:0.25rem; width:1.25rem; height:1.25rem; background:#0D5C3A; border-radius:50%; border:3px solid #F9F9F7; z-index:1; }
+
+  /* POPUP */
+  #engagePopup { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(120px); z-index:100; width:min(90vw,480px); background:#fff; border-radius:1.25rem; box-shadow:0 24px 64px rgba(0,0,0,0.14); border-top:3px solid #B3EBF2; padding:1.75rem; transition:transform 0.45s cubic-bezier(0.34,1.56,0.64,1); }
+  #engagePopup.show { transform:translateX(-50%) translateY(0); }
+
+  /* MOBILE MENU */
+  #mobileMenu { display:none; }
+  #mobileMenu.open { display:block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar" class="nav-wrap" style="background:rgba(249,249,247,0.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,0.07);">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="text-xl font-bold tracking-tight" style="color:#0D5C3A;letter-spacing:-0.03em;">Nexora</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+      <a href="services.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Services</a>
+      <a href="about.html" class="text-sm font-medium transition-colors" style="color:#0D5C3A;font-weight:600;">About</a>
+      <a href="contact.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Contact</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="booking.html" class="btn-pill-nav">
+        Book a call
+        <span class="arr-dark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+    <button id="menuToggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="#1C1C22" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="md:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-3">
+    <a href="index.html" class="block text-sm font-medium text-gray-700 py-1">Home</a>
+    <a href="services.html" class="block text-sm font-medium text-gray-700 py-1">Services</a>
+    <a href="about.html" class="block text-sm font-medium py-1" style="color:#0D5C3A;">About</a>
+    <a href="contact.html" class="block text-sm font-medium text-gray-700 py-1">Contact</a>
+    <a href="booking.html" class="btn-pill-dark w-fit mt-2">Book a call <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-scene flex items-center">
+  <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+    <div class="max-w-3xl">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-6" style="color:#B3EBF2;">Our Story</span>
+      <h1 class="font-normal leading-tight mb-6" style="font-size:clamp(2.5rem,6vw,4.5rem);color:#fff;letter-spacing:-0.03em;">
+        Built by engineers,<br><em style="color:#B3EBF2;font-style:italic;">driven by outcomes</em>
+      </h1>
+      <p class="text-lg leading-relaxed max-w-xl" style="color:rgba(255,255,255,0.72);">
+        Nexora was founded on a simple belief: technology should create measurable business impact, not just digital presence. We partner with ambitious teams to build software that scales.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION STRIP -->
+<section class="py-20" style="background:#fff;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style="color:#0D5C3A;">Our Mission</span>
+        <h2 class="font-normal leading-tight mb-6" style="font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.03em;color:#1C1C22;">
+          We exist to make <em style="color:#0D5C3A;font-style:italic;">complex technology</em> approachable
+        </h2>
+        <p class="text-base leading-relaxed text-gray-600 mb-6">
+          From seed-stage startups to enterprise teams, we've helped over 120 organizations turn technical challenges into competitive advantages. Our multidisciplinary team brings together expertise in AI, cloud infrastructure, and product design.
+        </p>
+        <p class="text-base leading-relaxed text-gray-600">
+          We measure success in shipped products, reduced costs, and teams that feel confident in their technology — not in lines of code or billable hours.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-gray-50 rounded-2xl p-6 stat-card-green">
+          <div class="font-normal mb-1" style="font-size:3rem;color:#0D5C3A;letter-spacing:-0.04em;">120+</div>
+          <div class="text-sm font-medium text-gray-600">Clients served globally</div>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-6 stat-card-pink">
+          <div class="font-normal mb-1" style="font-size:3rem;color:#1C1C22;letter-spacing:-0.04em;">8</div>
+          <div class="text-sm font-medium text-gray-600">Years in business</div>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-6 stat-card-blue">
+          <div class="font-normal mb-1" style="font-size:3rem;color:#1C1C22;letter-spacing:-0.04em;">98%</div>
+          <div class="text-sm font-medium text-gray-600">Client satisfaction rate</div>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-6 stat-card-cyan">
+          <div class="font-normal mb-1" style="font-size:3rem;color:#1C1C22;letter-spacing:-0.04em;">40+</div>
+          <div class="text-sm font-medium text-gray-600">Engineers & designers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="py-20" style="background:#F9F9F7;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style="color:#0D5C3A;">What We Stand For</span>
+      <h2 class="font-normal" style="font-size:clamp(1.875rem,4vw,2.75rem);letter-spacing:-0.03em;color:#1C1C22;">
+        Principles that <em style="color:#0D5C3A;font-style:italic;">guide every decision</em>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Value 1 -->
+      <div class="value-card">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:#B3EBF2;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.8 4.4A2 2 0 016 6.2V8a2 2 0 01-2 2H2.2C1.54 10 1 10.54 1 11.2v1.6c0 .66.54 1.2 1.2 1.2H4a2 2 0 012 2v1.8a2 2 0 001.8 1.99l1.4.14c.64.06 1.2-.43 1.2-1.07V18a2 2 0 012-2h.8" stroke="#0D5C3A" stroke-width="1.75" stroke-linecap="round"/><circle cx="18" cy="18" r="4" stroke="#0D5C3A" stroke-width="1.75"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-2" style="color:#1C1C22;">Outcome obsessed</h3>
+        <p class="text-sm leading-relaxed text-gray-600">We start every engagement with your business goals, not technical preferences. The best solution is always the one that moves the needle for you.</p>
+      </div>
+      <!-- Value 2 -->
+      <div class="value-card">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:#F9A8D4;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#1C1C22" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-2" style="color:#1C1C22;">Radical transparency</h3>
+        <p class="text-sm leading-relaxed text-gray-600">No surprises, no black boxes. We share progress openly, flag risks early, and communicate as partners — not vendors hiding behind jargon.</p>
+      </div>
+      <!-- Value 3 -->
+      <div class="value-card">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:#93C5FD;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#1C1C22" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-2" style="color:#1C1C22;">Speed without shortcuts</h3>
+        <p class="text-sm leading-relaxed text-gray-600">We move fast — but never at the cost of architecture or security. Fast delivery and long-term maintainability aren't trade-offs, they're both requirements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="py-20" style="background:#fff;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style="color:#0D5C3A;">The Team</span>
+      <h2 class="font-normal" style="font-size:clamp(1.875rem,4vw,2.75rem);letter-spacing:-0.03em;color:#1C1C22;">
+        People who <em style="color:#0D5C3A;font-style:italic;">ship great things</em>
+      </h2>
+      <p class="text-base text-gray-500 mt-4 max-w-xl mx-auto">A distributed team of engineers, designers, and strategists who love hard problems.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Member 1 -->
+      <div class="team-card">
+        <div class="team-avatar flex items-center justify-center" style="background:linear-gradient(135deg,#0D5C3A 0%,#1e4d3b 100%);height:220px;">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="14" fill="rgba(255,255,255,0.25)"/><ellipse cx="32" cy="56" rx="22" ry="14" fill="rgba(255,255,255,0.15)"/></svg>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold" style="color:#1C1C22;">Marcus Chen</div>
+          <div class="text-xs font-medium mt-0.5" style="color:#0D5C3A;">CEO & Co-founder</div>
+          <p class="text-xs leading-relaxed text-gray-500 mt-2">Former Staff Engineer at Stripe. Passionate about distributed systems and developer experience.</p>
+        </div>
+      </div>
+      <!-- Member 2 -->
+      <div class="team-card">
+        <div class="team-avatar flex items-center justify-center" style="background:linear-gradient(135deg,#1e3a5f 0%,#2d5282 100%);height:220px;">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="14" fill="rgba(255,255,255,0.25)"/><ellipse cx="32" cy="56" rx="22" ry="14" fill="rgba(255,255,255,0.15)"/></svg>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold" style="color:#1C1C22;">Priya Sharma</div>
+          <div class="text-xs font-medium mt-0.5" style="color:#0D5C3A;">CTO & Co-founder</div>
+          <p class="text-xs leading-relaxed text-gray-500 mt-2">ML researcher turned product builder. Led AI infrastructure at two unicorn startups before Nexora.</p>
+        </div>
+      </div>
+      <!-- Member 3 -->
+      <div class="team-card">
+        <div class="team-avatar flex items-center justify-center" style="background:linear-gradient(135deg,#4a1d4a 0%,#6b2d6b 100%);height:220px;">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="14" fill="rgba(255,255,255,0.25)"/><ellipse cx="32" cy="56" rx="22" ry="14" fill="rgba(255,255,255,0.15)"/></svg>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold" style="color:#1C1C22;">James Okafor</div>
+          <div class="text-xs font-medium mt-0.5" style="color:#0D5C3A;">Head of Engineering</div>
+          <p class="text-xs leading-relaxed text-gray-500 mt-2">10 years scaling backend systems. Built cloud infra serving 50M+ daily active users at previous roles.</p>
+        </div>
+      </div>
+      <!-- Member 4 -->
+      <div class="team-card">
+        <div class="team-avatar flex items-center justify-center" style="background:linear-gradient(135deg,#5c3a1e 0%,#7a4f2a 100%);height:220px;">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="14" fill="rgba(255,255,255,0.25)"/><ellipse cx="32" cy="56" rx="22" ry="14" fill="rgba(255,255,255,0.15)"/></svg>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold" style="color:#1C1C22;">Sofia Reyes</div>
+          <div class="text-xs font-medium mt-0.5" style="color:#0D5C3A;">Design Lead</div>
+          <p class="text-xs leading-relaxed text-gray-500 mt-2">Product designer with a systems thinking approach. Obsessed with accessibility and motion design.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE / STORY -->
+<section class="py-20" style="background:#F9F9F7;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div>
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style="color:#0D5C3A;">Our Journey</span>
+        <h2 class="font-normal leading-tight mb-4" style="font-size:clamp(1.875rem,4vw,2.75rem);letter-spacing:-0.03em;color:#1C1C22;">
+          From two founders<br>to a <em style="color:#0D5C3A;font-style:italic;">global team</em>
+        </h2>
+        <p class="text-base leading-relaxed text-gray-600">Every milestone shaped how we build and who we build for.</p>
+      </div>
+      <div class="space-y-8">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="font-semibold text-sm mb-1" style="color:#0D5C3A;">2016 — Founded</div>
+          <p class="text-sm leading-relaxed text-gray-600">Marcus and Priya start Nexora out of a San Francisco co-working space, focused on helping early-stage startups build their MVPs faster.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="font-semibold text-sm mb-1" style="color:#0D5C3A;">2018 — First enterprise client</div>
+          <p class="text-sm leading-relaxed text-gray-600">Landed our first Fortune 500 engagement — a cloud migration project that set the foundation for our infrastructure practice.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="font-semibold text-sm mb-1" style="color:#0D5C3A;">2020 — AI practice launch</div>
+          <p class="text-sm leading-relaxed text-gray-600">With Priya leading, we built our dedicated AI/ML practice — one of the first agencies to specialize in production LLM deployment.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="font-semibold text-sm mb-1" style="color:#0D5C3A;">2024 — 40 people, 4 continents</div>
+          <p class="text-sm leading-relaxed text-gray-600">We grew to 40 full-time engineers and designers, serving clients across North America, Europe, Asia, and Australia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WORK WITH US -->
+<section class="py-20" style="background:#fff;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14">
+      <span class="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style="color:#0D5C3A;">Why Nexora</span>
+      <h2 class="font-normal" style="font-size:clamp(1.875rem,4vw,2.75rem);letter-spacing:-0.03em;color:#1C1C22;">
+        What makes us <em style="color:#0D5C3A;font-style:italic;">different</em>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="flex gap-4 p-6 rounded-2xl" style="background:#F9F9F7;">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#B3EBF2;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6.5 10.5l2.5 2.5 5-5" stroke="#0D5C3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold mb-1" style="color:#1C1C22;">Senior-only team</div>
+          <p class="text-sm leading-relaxed text-gray-600">Every person on your project has 5+ years of production experience. No junior bait-and-switch — you get the team you meet.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-6 rounded-2xl" style="background:#F9F9F7;">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-content-center flex-shrink-0" style="background:#F9A8D4;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6.5 10.5l2.5 2.5 5-5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold mb-1" style="color:#1C1C22;">Fixed-scope clarity</div>
+          <p class="text-sm leading-relaxed text-gray-600">We scope projects precisely and deliver them on-budget. If scope changes, we renegotiate transparently — never surprise you.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-6 rounded-2xl" style="background:#F9F9F7;">
+        <div class="w-10 h-10 rounded-xl flex items-center flex-shrink-0" style="background:#93C5FD;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6.5 10.5l2.5 2.5 5-5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold mb-1" style="color:#1C1C22;">Knowledge transfer built-in</div>
+          <p class="text-sm leading-relaxed text-gray-600">We document as we build. When we hand off, your team can maintain and extend without us. That's by design, not an accident.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 p-6 rounded-2xl" style="background:#F9F9F7;">
+        <div class="w-10 h-10 rounded-xl flex items-center flex-shrink-0" style="background:#B3EBF2;display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6.5 10.5l2.5 2.5 5-5" stroke="#0D5C3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="font-semibold mb-1" style="color:#1C1C22;">Long-term retainer option</div>
+          <p class="text-sm leading-relaxed text-gray-600">Many clients move from project to retainer. A dedicated team that knows your codebase deeply is more valuable than rotating contractors.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA DARK -->
+<section class="py-24" style="background:#1C1C22;">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="font-normal mb-6" style="font-size:clamp(2rem,5vw,3.5rem);color:#fff;letter-spacing:-0.03em;">
+      Ready to work with a team that <em style="color:#B3EBF2;font-style:italic;">cares deeply</em>?
+    </h2>
+    <p class="text-lg mb-10" style="color:rgba(255,255,255,0.65);">Let's talk about your project. First conversation is always free.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="booking.html" class="btn-pill-cyan">
+        Schedule a call
+        <span class="arr-dark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="contact.html" class="btn-pill-ghost" style="color:#fff;border-color:rgba(255,255,255,0.3);">
+        Send a message
+        <span style="width:2rem;height:2rem;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#111117;color:rgba(255,255,255,0.55);">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
+      <div class="col-span-2">
+        <div class="text-3xl font-bold mb-3" style="color:#0D5C3A;letter-spacing:-0.04em;">Nexora</div>
+        <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(255,255,255,0.45);">Building the software infrastructure that powers ambitious companies.</p>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Services</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="services.html" class="hover:text-white transition-colors">Cloud & DevOps</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">AI & Machine Learning</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">Web Development</a></li>
+          <li><a href="services.html" class="hover:text-white transition-colors">Mobile Apps</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Company</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="booking.html" class="hover:text-white transition-colors">Book a Call</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.35);">Contact</div>
+        <ul class="space-y-2 text-sm">
+          <li>hello@nexora.dev</li>
+          <li>+1 (415) 555-0192</li>
+          <li>San Francisco, CA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t pt-8 flex flex-col md:flex-row justify-between gap-4 text-xs" style="border-color:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);">
+      <span>© 2024 Nexora Technologies, Inc. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ENGAGEMENT POPUP -->
+<div id="engagePopup">
+  <button onclick="document.getElementById('engagePopup').classList.remove('show');sessionStorage.setItem('popupSeen','1');" style="position:absolute;top:1rem;right:1rem;width:1.75rem;height:1.75rem;border-radius:50%;background:#f3f4f6;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <div class="text-xs font-semibold tracking-widest uppercase mb-2" style="color:#0D5C3A;">Free Consultation</div>
+  <h3 class="font-semibold text-lg mb-2" style="color:#1C1C22;letter-spacing:-0.02em;">Get a project estimate in 24 hours</h3>
+  <p class="text-sm leading-relaxed text-gray-500 mb-4">Tell us what you're building and we'll scope it, price it, and tell you exactly how we'd approach it — no commitment required.</p>
+  <a href="booking.html" onclick="sessionStorage.setItem('popupSeen','1');" class="btn-pill-dark w-full justify-center">
+    Book free call
+    <span class="arr"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#1C1C22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+</div>
+
+<script>
+  // Sticky nav
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Popup
+  if (!sessionStorage.getItem('popupSeen')) {
+    setTimeout(() => document.getElementById('engagePopup').classList.add('show'), 2500);
+  }
+</script>
+</body>
+</html>
